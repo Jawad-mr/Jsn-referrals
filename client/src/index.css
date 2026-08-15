@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  /* Signature palette - dark base, single yellow accent used deliberately */
+  --color-ink: #0b0c0f;
+  --color-surface: #151619;
+  --color-surface-raised: #1c1e22;
+  --color-border: #2a2c31;
+
+  --color-yellow: #f5c518;
+  --color-yellow-dim: #d4a90f;
+  --color-amber: #f2a73b;
+
+  --color-mint: #3ed598;
+  --color-danger: #ef5b5b;
+
+  --color-text: #f2f1ed;
+  --color-text-muted: #9a9ca3;
+  --color-text-faint: #5c5e64;
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-yellow);
+  color: var(--color-ink);
+}
+
+/* Visible keyboard focus everywhere - accessibility floor */
+:focus-visible {
+  outline: 2px solid var(--color-yellow);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Ticker marquee for the earnings feed - signature element */
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: ticker-scroll 28s linear infinite;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* Thin custom scrollbar for dashboard tables */
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 999px;
+}
