@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   ArrowLeft,
   Share2,
@@ -10,34 +10,30 @@ import {
   Award,
   Layers,
   ArrowUpRight,
-  ShieldCheck,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ReferModal from "../components/ReferModal";
 import { getOfferingBySlug, ALL_OFFERINGS } from "../data/catalog";
-import { useAuth } from "../context/AuthContext";
 
 export default function OfferingDetail() {
   const { slug } = useParams();
-  const navigate = useNavigate();
-  const { user } = useAuth();
   const [modalOpen, setModalOpen] = useState(false);
 
   const item = getOfferingBySlug(slug);
 
   if (!item) {
     return (
-      <div className="min-h-screen bg-[var(--color-ink)] text-white">
+      <div className="min-h-screen bg-[var(--color-ink)] text-white app-screen-container">
         <Navbar />
-        <div className="mx-auto max-w-3xl px-5 py-24 text-center">
-          <h1 className="font-[family-name:var(--font-display)] text-3xl font-bold">Offering not found</h1>
-          <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-            The product or service you're looking for doesn't exist.
+        <div className="mx-auto max-w-md px-5 py-24 text-center">
+          <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold">Offering not found</h1>
+          <p className="mt-2 text-xs text-[var(--color-text-muted)]">
+            The product or service you're looking for doesn't exist or has moved.
           </p>
           <Link
             to="/products-services"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--color-yellow)] px-6 py-2.5 text-xs font-bold text-[var(--color-ink)]"
+            className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-[var(--color-yellow)] px-5 py-2.5 text-xs font-bold text-[var(--color-ink)]"
           >
             <ArrowLeft size={14} /> Back to Catalog
           </Link>
@@ -51,67 +47,68 @@ export default function OfferingDetail() {
   const otherOfferings = ALL_OFFERINGS.filter((o) => o.id !== item.id).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-[var(--color-ink)] text-[var(--color-text)]">
+    <div className="min-h-screen bg-[var(--color-ink)] text-[var(--color-text)] app-screen-container">
       <Navbar />
 
-      {/* BREADCRUMB HEADER */}
-      <div className="border-b border-[var(--color-border)] bg-[var(--color-surface)]/40 py-4">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 sm:px-8">
+      {/* TOP NAVIGATION BAR */}
+      <div className="sticky top-0 z-30 border-b border-[var(--color-border)] bg-[var(--color-ink)]/90 py-3 backdrop-blur-md">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 sm:px-8">
           <Link
             to="/products-services"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-[var(--color-text-muted)] transition hover:text-white"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--color-text-muted)] transition active:scale-95 hover:text-white"
           >
-            <ArrowLeft size={14} /> Back to Products &amp; Services
+            <ArrowLeft size={16} /> All Offerings
           </Link>
-          <span className="rounded-full bg-[var(--color-ink)] px-3 py-1 text-[11px] font-medium text-[var(--color-yellow)] border border-[var(--color-border)]">
-            10% Referrer Commission
+
+          <span className="rounded-full bg-[var(--color-surface)] border border-[var(--color-yellow)]/30 px-3 py-1 text-[11px] font-bold text-[var(--color-yellow)]">
+            10% Commission
           </span>
         </div>
       </div>
 
-      {/* HERO SECTION */}
-      <main className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-start">
-          {/* LEFT: Visual Preview & Quick Actions */}
+      {/* MAIN DETAIL CONTAINER */}
+      <main className="mx-auto max-w-5xl px-4 py-6 sm:px-8 sm:py-10">
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
+          {/* LEFT: Product Visual & Action Box */}
           <div className="lg:col-span-5">
-            <div className="overflow-hidden rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-2xl">
-              <div className="relative h-64 w-full sm:h-80">
+            <div className="overflow-hidden rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xl">
+              <div className="relative h-56 w-full sm:h-72">
                 <img
                   src={item.image}
                   alt={item.name}
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface)] via-transparent to-transparent opacity-80" />
-                <div className="absolute left-4 top-4 flex items-center gap-2">
-                  <span className="rounded-full bg-[var(--color-yellow)] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[var(--color-ink)]">
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface)] via-black/20 to-transparent" />
+                <div className="absolute left-3 top-3 flex items-center gap-1.5">
+                  <span className="rounded-full bg-[var(--color-yellow)] px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-[var(--color-ink)]">
                     {isProduct ? "Product" : "Service"}
                   </span>
                   {item.badge && (
-                    <span className="rounded-full border border-white/10 bg-black/60 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
+                    <span className="rounded-full border border-white/10 bg-black/60 px-2.5 py-0.5 text-[10px] font-medium text-white backdrop-blur-md">
                       {item.badge}
                     </span>
                   )}
                 </div>
               </div>
 
-              {/* Action bar inside box */}
-              <div className="p-6">
-                <div className="rounded-2xl border border-[var(--color-yellow)]/30 bg-gradient-to-br from-[var(--color-yellow)]/10 to-transparent p-4">
+              {/* Action Box Inside Card */}
+              <div className="p-4 sm:p-5">
+                <div className="rounded-2xl border border-[var(--color-yellow)]/20 bg-[var(--color-yellow)]/10 p-3.5">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-white">Referral Payout</span>
-                    <span className="font-bold text-[var(--color-yellow)]">10% of Project Value</span>
+                    <span className="font-semibold text-white">💰 Referrer Payout</span>
+                    <span className="font-extrabold text-[var(--color-yellow)]">10% Cash Deal</span>
                   </div>
                   <p className="mt-1 text-[11px] text-[var(--color-text-muted)]">
                     {item.commissionNote || "Earn on every client who completes this project or license."}
                   </p>
                 </div>
 
-                <div className="mt-6 flex flex-col gap-3">
+                <div className="mt-4 flex flex-col gap-2.5">
                   <button
                     onClick={() => setModalOpen(true)}
-                    className="flex w-full items-center justify-center gap-2 rounded-full bg-[var(--color-yellow)] px-6 py-3.5 text-sm font-bold text-[var(--color-ink)] shadow-lg transition hover:bg-[var(--color-amber)]"
+                    className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--color-yellow)] py-3.5 text-xs font-bold uppercase tracking-wider text-[var(--color-ink)] shadow-md transition active:scale-95 hover:bg-[var(--color-amber)]"
                   >
-                    <Share2 size={16} />
+                    <Share2 size={15} />
                     Refer {item.name}
                   </button>
 
@@ -120,9 +117,9 @@ export default function OfferingDetail() {
                       href={item.officialUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex w-full items-center justify-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-ink)] px-6 py-3 text-xs font-semibold text-white transition hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]"
+                      className="flex w-full items-center justify-center gap-1.5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-ink)] py-3 text-xs font-semibold text-white transition active:scale-95 hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]"
                     >
-                      {isProduct ? "Explore Live Product Demo" : "View Official Studio Page"} <ExternalLink size={14} />
+                      {isProduct ? "Explore Live Product Demo" : "View Studio Page"} <ExternalLink size={13} />
                     </a>
                   )}
                 </div>
@@ -130,27 +127,27 @@ export default function OfferingDetail() {
             </div>
           </div>
 
-          {/* RIGHT: Detailed Information */}
-          <div className="space-y-8 lg:col-span-7">
+          {/* RIGHT: Detailed Specifications */}
+          <div className="space-y-6 lg:col-span-7">
             <div>
-              <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-yellow)]">
-                <Sparkles size={13} /> {item.category}
-              </div>
-              <h1 className="mt-2 font-[family-name:var(--font-display)] text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
+              <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-[var(--color-yellow)]">
+                <Sparkles size={12} /> {item.category}
+              </span>
+              <h1 className="mt-1 font-[family-name:var(--font-display)] text-2xl font-extrabold text-white sm:text-3xl">
                 {item.name}
               </h1>
-              <p className="mt-4 text-base leading-relaxed text-[var(--color-text-muted)] sm:text-lg">
+              <p className="mt-2 text-xs leading-relaxed text-[var(--color-text-muted)] sm:text-sm">
                 {item.description || item.shortDescription}
               </p>
             </div>
 
-            {/* WHAT IT DOES / WHAT JSN PROVIDES */}
-            <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-7">
-              <h3 className="flex items-center gap-2 font-[family-name:var(--font-display)] text-lg font-bold text-white">
-                <Layers size={18} className="text-[var(--color-yellow)]" />
+            {/* WHAT IT DOES */}
+            <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 sm:p-5">
+              <h3 className="flex items-center gap-2 font-[family-name:var(--font-display)] text-sm font-bold text-white sm:text-base">
+                <Layers size={16} className="text-[var(--color-yellow)]" />
                 {isProduct ? "What the Product Does" : "What JSN Creative Provides"}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-[var(--color-text-muted)]">
+              <p className="mt-2 text-xs leading-relaxed text-[var(--color-text-muted)]">
                 {item.whatItDoes || item.whatItProvides || item.description}
               </p>
             </div>
@@ -158,16 +155,16 @@ export default function OfferingDetail() {
             {/* MAIN FEATURES */}
             {item.features && (
               <div>
-                <h3 className="font-[family-name:var(--font-display)] text-lg font-bold text-white">
+                <h3 className="font-[family-name:var(--font-display)] text-sm font-bold text-white sm:text-base">
                   Main Features &amp; Capabilities
                 </h3>
-                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
                   {item.features.map((feature, i) => (
                     <div
                       key={i}
-                      className="flex items-start gap-2.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-3.5 text-xs text-white"
+                      className="flex items-start gap-2.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-3 text-xs text-white"
                     >
-                      <CheckCircle2 size={16} className="text-[var(--color-mint)] flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 size={15} className="text-[var(--color-mint)] flex-shrink-0 mt-0.5" />
                       <span>{feature}</span>
                     </div>
                   ))}
@@ -175,13 +172,13 @@ export default function OfferingDetail() {
               </div>
             )}
 
-            {/* WHO IT IS USEFUL FOR */}
-            <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-7">
-              <h3 className="flex items-center gap-2 font-[family-name:var(--font-display)] text-lg font-bold text-white">
-                <Users size={18} className="text-[var(--color-yellow)]" />
+            {/* WHO IT IS FOR */}
+            <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 sm:p-5">
+              <h3 className="flex items-center gap-2 font-[family-name:var(--font-display)] text-sm font-bold text-white sm:text-base">
+                <Users size={16} className="text-[var(--color-yellow)]" />
                 Who Needs This?
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)]">
+              <p className="mt-2 text-xs leading-relaxed text-[var(--color-text-muted)]">
                 {item.targetAudience || item.whoNeedsIt}
               </p>
             </div>
@@ -189,16 +186,16 @@ export default function OfferingDetail() {
             {/* KEY BENEFITS */}
             {(item.benefits || item.keyBenefits) && (
               <div>
-                <h3 className="font-[family-name:var(--font-display)] text-lg font-bold text-white">
-                  Key Benefits &amp; Advantage
+                <h3 className="font-[family-name:var(--font-display)] text-sm font-bold text-white sm:text-base">
+                  Key Benefits
                 </h3>
-                <div className="mt-4 space-y-2.5">
+                <div className="mt-3 space-y-2">
                   {(item.benefits || item.keyBenefits).map((b, i) => (
                     <div
                       key={i}
-                      className="flex items-center gap-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-xs sm:text-sm text-white"
+                      className="flex items-center gap-2.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-2.5 text-xs text-white"
                     >
-                      <Award size={16} className="text-[var(--color-yellow)] flex-shrink-0" />
+                      <Award size={15} className="text-[var(--color-yellow)] flex-shrink-0" />
                       <span>{b}</span>
                     </div>
                   ))}
@@ -209,39 +206,39 @@ export default function OfferingDetail() {
         </div>
 
         {/* RELATED OFFERINGS */}
-        <section className="mt-20 border-t border-[var(--color-border)] pt-14">
+        <section className="mt-14 border-t border-[var(--color-border)] pt-8">
           <div className="flex items-center justify-between">
-            <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-white">
+            <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-white">
               Explore More Offerings
             </h3>
             <Link
               to="/products-services"
-              className="text-xs font-semibold text-[var(--color-yellow)] hover:underline"
+              className="text-xs font-bold text-[var(--color-yellow)] hover:underline"
             >
               View all ({ALL_OFFERINGS.length}) →
             </Link>
           </div>
 
-          <div className="mt-6 grid gap-6 sm:grid-cols-3">
+          <div className="mt-4 grid gap-3 sm:grid-cols-3">
             {otherOfferings.map((other) => (
               <Link
                 key={other.id}
                 to={`/products-services/${other.slug}`}
-                className="group flex flex-col justify-between rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 transition hover:border-[var(--color-yellow)]/50"
+                className="group flex flex-col justify-between rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition hover:border-[var(--color-yellow)]/40"
               >
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--color-yellow)]">
                     {other.type} • {other.category}
                   </span>
-                  <h4 className="mt-1.5 font-[family-name:var(--font-display)] text-base font-bold text-white group-hover:text-[var(--color-yellow)]">
+                  <h4 className="mt-1 font-[family-name:var(--font-display)] text-sm font-bold text-white group-hover:text-[var(--color-yellow)]">
                     {other.name}
                   </h4>
-                  <p className="mt-1.5 line-clamp-2 text-xs text-[var(--color-text-muted)]">
+                  <p className="mt-1 line-clamp-2 text-[11px] text-[var(--color-text-muted)]">
                     {other.shortDescription}
                   </p>
                 </div>
-                <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-[var(--color-text-muted)] group-hover:text-white">
-                  Learn more <ArrowUpRight size={13} />
+                <span className="mt-3 inline-flex items-center gap-1 text-[11px] font-semibold text-[var(--color-text-muted)] group-hover:text-white">
+                  Details <ArrowUpRight size={12} />
                 </span>
               </Link>
             ))}

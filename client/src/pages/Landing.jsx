@@ -5,291 +5,314 @@ import {
   Share2,
   Users,
   Wallet,
-  Image as ImageIcon,
   ShieldCheck,
   Zap,
+  Sparkles,
   ChevronDown,
+  Compass,
+  ArrowRight,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import OfferingCard from "../components/OfferingCard";
+import ReferModal from "../components/ReferModal";
 import api from "../lib/api";
 import { formatINR } from "../lib/format";
+import { PRODUCTS, SERVICES } from "../data/catalog";
 
 const FALLBACK_FEED = [
-  { name: "R••••h", amount: 4200 },
-  { name: "S••a", amount: 8500 },
-  { name: "A•••t", amount: 2100 },
-  { name: "P••••a", amount: 12000 },
-  { name: "M•••n", amount: 6300 },
+  { name: "Rahul K.", amount: 8500 },
+  { name: "Sneha M.", amount: 14200 },
+  { name: "Arjun T.", amount: 6400 },
+  { name: "Priya S.", amount: 19800 },
+  { name: "Vikram P.", amount: 11500 },
 ];
 
 const FALLBACK_LEADERBOARD = [
-  { name: "Rahul K.", totalEarnings: 34500 },
-  { name: "Sneha M.", totalEarnings: 27800 },
-  { name: "Arjun T.", totalEarnings: 19200 },
+  { name: "Rahul K.", totalEarnings: 42500, referralsCount: 5 },
+  { name: "Sneha M.", totalEarnings: 31800, referralsCount: 3 },
+  { name: "Arjun T.", totalEarnings: 24200, referralsCount: 4 },
+];
+
+const FAQS = [
+  {
+    q: "How does the Refer JSN program work?",
+    a: "You share genuine JSN Creative products or services with businesses, friends, or clients who need them. When they purchase a software license or start a development contract, you earn a flat 10% commission on the deal value.",
+  },
+  {
+    q: "Is there any cost or fee to join?",
+    a: "No. The program is 100% free to join with no minimum sales quotas, registration fees, or hidden costs.",
+  },
+  {
+    q: "How do I refer a business?",
+    a: "You can either share your unique referral link (or one-tap WhatsApp / Telegram share), or submit their project details directly through your referrer dashboard.",
+  },
+  {
+    q: "When and how do I receive commission payouts?",
+    a: "Once the referred client completes their project milestone or license payment, your commission is automatically approved and transferred via UPI or direct Bank Transfer.",
+  },
 ];
 
 export default function Landing() {
   const [feed, setFeed] = useState(FALLBACK_FEED);
   const [leaderboard, setLeaderboard] = useState(FALLBACK_LEADERBOARD);
+  const [openFaq, setOpenFaq] = useState(null);
+  const [selectedOffering, setSelectedOffering] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    api.get("/referrals/activity-feed").then((res) => {
-      if (res.data.feed?.length) setFeed(res.data.feed);
-    }).catch(() => {});
-    api.get("/referrals/leaderboard").then((res) => {
-      if (res.data.leaderboard?.length) setLeaderboard(res.data.leaderboard);
-    }).catch(() => {});
+    api.get("/referrals/activity-feed")
+      .then((res) => {
+        if (res.data.feed?.length) setFeed(res.data.feed);
+      })
+      .catch(() => {});
+
+    api.get("/referrals/leaderboard")
+      .then((res) => {
+        if (res.data.leaderboard?.length) setLeaderboard(res.data.leaderboard);
+      })
+      .catch(() => {});
   }, []);
 
-  const tickerItems = [...feed, ...feed]; // duplicated for seamless loop
+  function handleRefer(offering) {
+    setSelectedOffering(offering);
+    setModalOpen(true);
+  }
+
+  const featuredOfferings = [
+    PRODUCTS.find((p) => p.slug === "bakery-pos"),
+    PRODUCTS.find((p) => p.slug === "restaurant-pos"),
+    SERVICES.find((s) => s.slug === "web-development"),
+    SERVICES.find((s) => s.slug === "ai-solutions"),
+  ].filter(Boolean);
+
+  const tickerItems = [...feed, ...feed];
 
   return (
-    <div className="min-h-screen bg-[var(--color-ink)]">
+    <div className="min-h-screen bg-[var(--color-ink)] text-[var(--color-text)] app-screen-container">
       <Navbar />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden border-b border-[var(--color-border)]">
+      {/* HERO SECTION - Compact & Punchy */}
+      <section className="relative overflow-hidden border-b border-[var(--color-border)] px-4 pt-10 pb-12 sm:px-8 sm:pt-16 sm:pb-16">
         <div
-          className="pointer-events-none absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full opacity-20 blur-[120px]"
+          className="pointer-events-none absolute -top-32 right-[-5%] h-[380px] w-[380px] rounded-full opacity-20 blur-[100px]"
           style={{ background: "radial-gradient(circle, var(--color-yellow), transparent 70%)" }}
         />
-        <div className="mx-auto max-w-7xl px-5 pb-20 pt-16 sm:px-8 sm:pt-24">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-1.5 text-xs font-medium text-[var(--color-text-muted)]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-mint)]" />
-            The Jsn Creative Referral Program is open
+
+        <div className="mx-auto max-w-5xl text-center sm:text-left">
+          {/* Status Chip */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[var(--color-surface)] px-3.5 py-1.5 text-xs font-semibold text-[var(--color-text-muted)] shadow-sm">
+            <span className="h-2 w-2 rounded-full bg-[var(--color-mint)] animate-pulse" />
+            Official Jsn Creative Referral Network
           </div>
 
-          <h1 className="mt-6 max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold leading-[1.08] tracking-tight text-[var(--color-text)] sm:text-6xl">
-            Know a business that needs a website? <span className="text-[var(--color-yellow)]">Get paid for the intro.</span>
+          <h1 className="mt-5 font-[family-name:var(--font-display)] text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.12]">
+            Know someone who needs tech? <br className="hidden sm:inline" />
+            <span className="text-[var(--color-yellow)]">Earn 10% commission on the deal.</span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--color-text-muted)] sm:text-lg">
-            Refer businesses to Jsn Creative for web, app, or AI work. When your referral becomes a client, you earn a real commission — no cap, no catch.
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--color-text-muted)] sm:text-base">
+            Explore ready-made software products and custom development services built by{" "}
+            <a
+              href="https://www.jsncreative.studio/"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-white underline decoration-[var(--color-yellow)] underline-offset-4 hover:text-[var(--color-yellow)]"
+            >
+              Jsn Creative Studio
+            </a>
+            . Refer clients in your network and earn cash payouts on every closed project.
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          {/* Quick Action CTAs */}
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link
+              to="/products-services"
+              className="flex items-center justify-center gap-2 rounded-2xl bg-[var(--color-yellow)] px-6 py-3.5 text-sm font-bold text-[var(--color-ink)] shadow-lg transition active:scale-95 hover:bg-[var(--color-amber)]"
+            >
+              <Compass size={18} />
+              Explore Products &amp; Services
+            </Link>
+
             <Link
               to="/join"
-              className="group flex items-center justify-center gap-1.5 rounded-full bg-[var(--color-yellow)] px-7 py-3.5 text-sm font-semibold text-[var(--color-ink)] transition hover:bg-[var(--color-amber)]"
+              className="flex items-center justify-center gap-2 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-3.5 text-sm font-semibold text-white transition active:scale-95 hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]"
             >
-              Join the program — it's free
-              <ArrowUpRight size={16} className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              Join Program Free <ArrowUpRight size={16} />
             </Link>
-            <a
-              href="#how-it-works"
-              className="flex items-center justify-center gap-1.5 rounded-full border border-[var(--color-border)] px-7 py-3.5 text-sm font-semibold text-[var(--color-text)] transition hover:border-[var(--color-text-muted)]"
-            >
-              See how it works
-            </a>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-[var(--color-text-faint)]">
-            <span className="flex items-center gap-2"><ShieldCheck size={15} className="text-[var(--color-mint)]" /> No cost to join</span>
-            <span className="flex items-center gap-2"><Zap size={15} className="text-[var(--color-yellow)]" /> Commission on every closed project</span>
-            <span className="flex items-center gap-2"><Users size={15} className="text-[var(--color-amber)]" /> Unlimited referrals</span>
-          </div>
-        </div>
-
-        {/* Signature element: live earnings ticker */}
-        <div className="border-t border-[var(--color-border)] bg-[var(--color-surface)] py-4">
-          <div className="overflow-hidden">
-            <div className="ticker-track flex w-max gap-8 whitespace-nowrap">
-              {tickerItems.map((item, i) => (
-                <span key={i} className="flex items-center gap-2 font-[family-name:var(--font-mono)] text-sm text-[var(--color-text-muted)]">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-mint)]" />
-                  {item.name} earned <span className="font-semibold text-[var(--color-yellow)]">{formatINR(item.amount)}</span>
-                </span>
-              ))}
-            </div>
+          {/* Feature Micro-Badges */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs text-[var(--color-text-faint)] sm:justify-start sm:gap-6">
+            <span className="flex items-center gap-1.5 font-medium text-[var(--color-text-muted)]">
+              <ShieldCheck size={15} className="text-[var(--color-mint)]" /> Zero Fees
+            </span>
+            <span className="flex items-center gap-1.5 font-medium text-[var(--color-text-muted)]">
+              <Zap size={15} className="text-[var(--color-yellow)]" /> 10% Flat Commission
+            </span>
+            <span className="flex items-center gap-1.5 font-medium text-[var(--color-text-muted)]">
+              <Users size={15} className="text-[var(--color-amber)]" /> Unlimited Referrals
+            </span>
           </div>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section id="how-it-works" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-        <div className="max-w-xl">
-          <p className="text-xs font-semibold uppercase tracking-wider text-[var(--color-yellow)]">How it works</p>
-          <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight sm:text-4xl">
-            Three steps, and you're earning
-          </h2>
+      {/* LIVE EARNINGS TICKER */}
+      <div className="border-b border-[var(--color-border)] bg-[var(--color-surface)] py-3">
+        <div className="overflow-hidden">
+          <div className="ticker-track flex w-max gap-8 whitespace-nowrap">
+            {tickerItems.map((item, i) => (
+              <span
+                key={i}
+                className="flex items-center gap-2 font-[family-name:var(--font-mono)] text-xs text-[var(--color-text-muted)]"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-mint)]" />
+                {item.name} earned{" "}
+                <span className="font-bold text-[var(--color-yellow)]">
+                  {formatINR(item.amount)}
+                </span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* FEATURED OFFERINGS SHOWCASE */}
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-8 sm:py-16">
+        <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+          <div>
+            <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[var(--color-yellow)]">
+              <Sparkles size={13} /> Featured Offerings
+            </div>
+            <h2 className="mt-1 font-[family-name:var(--font-display)] text-2xl font-bold text-white sm:text-3xl">
+              Products &amp; Services You Can Refer
+            </h2>
+            <p className="mt-1 text-xs text-[var(--color-text-muted)] sm:text-sm">
+              Pre-built software licenses &amp; high-value development contracts
+            </p>
+          </div>
+
+          <Link
+            to="/products-services"
+            className="inline-flex items-center gap-1 text-xs font-bold text-[var(--color-yellow)] hover:underline"
+          >
+            Browse All 16+ Offerings <ArrowRight size={14} />
+          </Link>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {[
-            {
-              icon: Users,
-              title: "Join free",
-              body: "Sign up in under a minute and get your own referral link and code — no fees, no minimums.",
-            },
-            {
-              icon: Share2,
-              title: "Refer someone",
-              body: "Share your link, or submit a lead directly from your dashboard with their contact details and what they need.",
-            },
-            {
-              icon: Wallet,
-              title: "Earn commission",
-              body: "When the project closes, you earn a percentage of its value. Track it live, get paid on approval.",
-            },
-          ].map((step, i) => (
-            <div key={step.title} className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-7">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--color-yellow)]/10 text-[var(--color-yellow)]">
-                <step.icon size={20} />
-              </div>
-              <h3 className="mt-5 font-[family-name:var(--font-display)] text-lg font-semibold">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)]">{step.body}</p>
-            </div>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {featuredOfferings.map((item) => (
+            <OfferingCard key={item.id} item={item} onRefer={handleRefer} />
           ))}
         </div>
       </section>
 
-      {/* PRODUCTS & SERVICES DISCOVERY PREVIEW */}
-      <section id="offerings-preview" className="border-t border-[var(--color-border)] bg-[var(--color-surface)]/40 py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-[var(--color-yellow)]">
-                Products &amp; Services
-              </p>
-              <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight sm:text-4xl">
-                What you're referring &amp; earning on
-              </h2>
-              <p className="mt-2 max-w-xl text-sm leading-relaxed text-[var(--color-text-muted)]">
-                Explore real, in-demand products &amp; services engineered by Jsn Creative. Refer any of them to businesses in your network.
-              </p>
-            </div>
-
-            <Link
-              to="/products-services"
-              className="inline-flex items-center gap-1.5 font-semibold text-xs text-[var(--color-yellow)] hover:underline"
-            >
-              Explore all products &amp; services (16+) →
-            </Link>
+      {/* THREE-STEP WORKFLOW */}
+      <section id="how-it-works" className="border-t border-[var(--color-border)] bg-[var(--color-surface)]/50 py-12 sm:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8">
+          <div className="max-w-xl">
+            <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-yellow)]">
+              Simple 3-Step Process
+            </p>
+            <h2 className="mt-1 font-[family-name:var(--font-display)] text-2xl font-bold text-white sm:text-3xl">
+              How You Earn with Jsn Creative
+            </h2>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {[
               {
-                slug: "bakery-pos",
-                name: "Bakery POS App",
-                type: "Product",
-                category: "POS & Billing",
-                desc: "Complete point-of-sale system for bakeries — inventory, orders, and daily sales in one place.",
-                image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80",
+                step: "01",
+                icon: Compass,
+                title: "Explore Offerings",
+                desc: "Discover our bakery POS, restaurant systems, mobile apps, or web development packages.",
               },
               {
-                slug: "restaurant-pos",
-                name: "Restaurant POS App",
-                type: "Product",
-                category: "POS & Billing",
-                desc: "Table management, kitchen display, and billing — everything a modern restaurant needs.",
-                image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=600&q=80",
+                step: "02",
+                icon: Share2,
+                title: "Share or Submit",
+                desc: "1-tap share to WhatsApp/Telegram with your referral link, or submit the lead directly from your dashboard.",
               },
               {
-                slug: "web-development",
-                name: "Web Development",
-                type: "Service",
-                category: "Development",
-                desc: "Fast, modern websites and web applications built with the latest technologies.",
-                image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80",
+                step: "03",
+                icon: Wallet,
+                title: "Get Paid 10%",
+                desc: "When the client completes their order or project milestone, receive direct cash commission into your account.",
               },
-              {
-                slug: "ai-solutions",
-                name: "AI Solutions & Integration",
-                type: "Service",
-                category: "AI & Automation",
-                desc: "Custom AI models, chatbots, and intelligent automation for business workflows.",
-                image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=600&q=80",
-              },
-            ].map((item) => (
+            ].map((s) => (
               <div
-                key={item.slug}
-                className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition hover:-translate-y-1 hover:border-[var(--color-yellow)]/50"
+                key={s.step}
+                className="relative rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-all hover:border-[var(--color-yellow)]/40"
               >
-                <div>
-                  <div className="relative mb-3.5 h-36 w-full overflow-hidden rounded-xl bg-[var(--color-ink)]">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <span className="absolute left-2.5 top-2.5 rounded-full bg-[var(--color-yellow)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[var(--color-ink)]">
-                      {item.type}
-                    </span>
-                  </div>
-                  <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-white group-hover:text-[var(--color-yellow)]">
-                    {item.name}
-                  </h3>
-                  <p className="mt-1 line-clamp-2 text-xs text-[var(--color-text-muted)]">{item.desc}</p>
+                <span className="font-[family-name:var(--font-mono)] text-xs font-extrabold text-[var(--color-yellow)]">
+                  {s.step}
+                </span>
+                <div className="mt-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-yellow)]/10 text-[var(--color-yellow)]">
+                  <s.icon size={19} />
                 </div>
-
-                <div className="mt-4 flex items-center justify-between border-t border-[var(--color-border)] pt-3 text-xs">
-                  <Link
-                    to={`/products-services/${item.slug}`}
-                    className="font-medium text-[var(--color-text-muted)] hover:text-white"
-                  >
-                    View Details
-                  </Link>
-                  <Link
-                    to={`/products-services/${item.slug}`}
-                    className="font-semibold text-[var(--color-yellow)] hover:underline"
-                  >
-                    Refer Deal →
-                  </Link>
-                </div>
+                <h3 className="mt-4 font-[family-name:var(--font-display)] text-base font-bold text-white">
+                  {s.title}
+                </h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-[var(--color-text-muted)]">
+                  {s.desc}
+                </p>
               </div>
             ))}
-          </div>
-
-          <div className="mt-10 text-center">
-            <Link
-              to="/products-services"
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-ink)] px-6 py-3 text-xs font-bold text-white transition hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]"
-            >
-              Browse Full Products &amp; Services Catalog <ArrowUpRight size={14} />
-            </Link>
           </div>
         </div>
       </section>
 
-      {/* EARNINGS / SOCIAL PROOF */}
-      <section id="earnings" className="border-y border-[var(--color-border)] bg-[var(--color-surface)]">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-          <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-[var(--color-yellow)]">Real earnings</p>
-              <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight sm:text-4xl">
-                See what referrers are already making
+      {/* TOP REFERRERS LEADERBOARD */}
+      <section id="earnings" className="border-t border-[var(--color-border)] py-12 sm:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8">
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-yellow)]">
+                Verified Earnings
+              </p>
+              <h2 className="mt-1 font-[family-name:var(--font-display)] text-2xl font-bold text-white sm:text-3xl">
+                Real Payouts to Real Referrers
               </h2>
-              <p className="mt-4 max-w-md text-[var(--color-text-muted)]">
-                Commission is a percentage of the project value — the bigger the project you refer, the more you earn. Here's this month's top earners.
+              <p className="mt-3 text-xs leading-relaxed text-[var(--color-text-muted)] sm:text-sm">
+                Every closed website, app, POS license, or AI project pays out a real 10% commission with zero deductions.
               </p>
               <Link
                 to="/join"
-                className="mt-7 inline-flex items-center gap-1.5 rounded-full bg-[var(--color-yellow)] px-6 py-3 text-sm font-semibold text-[var(--color-ink)] transition hover:bg-[var(--color-amber)]"
+                className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-[var(--color-yellow)] px-6 py-3 text-xs font-bold uppercase tracking-wider text-[var(--color-ink)] shadow-md transition active:scale-95 hover:bg-[var(--color-amber)]"
               >
-                Start earning too <ArrowUpRight size={15} />
+                Start Earning Now <ArrowUpRight size={14} />
               </Link>
             </div>
 
-            <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-ink)] p-6">
-              <p className="mb-4 text-xs font-medium uppercase tracking-wide text-[var(--color-text-faint)]">Top earners this month</p>
-              <div className="space-y-1">
-                {leaderboard.map((entry, i) => (
-                  <div key={i} className="flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-[var(--color-surface)]">
+            <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 lg:col-span-6">
+              <p className="mb-3 text-xs font-bold uppercase tracking-wider text-[var(--color-text-faint)]">
+                Top Earners This Month
+              </p>
+              <div className="space-y-2">
+                {leaderboard.map((entry, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center justify-between rounded-xl bg-[var(--color-ink)] p-3.5 border border-white/5"
+                  >
                     <div className="flex items-center gap-3">
                       <span
                         className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${
-                          i === 0 ? "bg-[var(--color-yellow)] text-[var(--color-ink)]" : "bg-[var(--color-surface-raised)] text-[var(--color-text-muted)]"
+                          idx === 0
+                            ? "bg-[var(--color-yellow)] text-[var(--color-ink)]"
+                            : "bg-[var(--color-surface-raised)] text-[var(--color-text-muted)]"
                         }`}
                       >
-                        {i + 1}
+                        {idx + 1}
                       </span>
-                      <span className="text-sm font-medium">{entry.name}</span>
+                      <div>
+                        <p className="text-xs font-bold text-white">{entry.name}</p>
+                        <p className="text-[10px] text-[var(--color-text-faint)]">
+                          {entry.referralsCount || 3} deals closed
+                        </p>
+                      </div>
                     </div>
-                    <span className="font-[family-name:var(--font-mono)] text-sm font-semibold text-[var(--color-yellow)]">
+
+                    <span className="font-[family-name:var(--font-mono)] text-xs font-bold text-[var(--color-yellow)]">
                       {formatINR(entry.totalEarnings)}
                     </span>
                   </div>
@@ -300,100 +323,61 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* MATERIALS PREVIEW */}
-      <section id="materials-preview" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-        <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
-          <div className="order-2 lg:order-1">
-            <div className="grid grid-cols-2 gap-4">
-              {["Instagram Story", "WhatsApp Caption", "LinkedIn Post", "Banner Pack"].map((label, i) => (
-                <div
-                  key={label}
-                  className={`flex aspect-[3/4] flex-col justify-between rounded-2xl border border-[var(--color-border)] p-4 ${
-                    i % 2 === 0 ? "bg-gradient-to-br from-[var(--color-yellow)]/15 to-[var(--color-surface)]" : "bg-[var(--color-surface)]"
-                  }`}
-                >
-                  <ImageIcon size={18} className="text-[var(--color-text-faint)]" />
-                  <p className="font-[family-name:var(--font-display)] text-sm font-medium text-[var(--color-text-muted)]">{label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="order-1 lg:order-2">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[var(--color-yellow)]">Ready-made materials</p>
-            <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight sm:text-4xl">
-              You don't have to design anything
-            </h2>
-            <p className="mt-4 max-w-md text-[var(--color-text-muted)]">
-              Every referrer gets access to ready-to-post banners, story templates, and pre-written captions for Instagram, WhatsApp, and LinkedIn. Just download, personalize your link, and post.
+      {/* FAQ SECTION */}
+      <section id="faq" className="border-t border-[var(--color-border)] bg-[var(--color-surface)]/30 py-12 sm:py-16">
+        <div className="mx-auto max-w-3xl px-4 sm:px-8">
+          <div className="text-center">
+            <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-yellow)]">
+              Got Questions?
             </p>
-            <ul className="mt-6 space-y-3 text-sm text-[var(--color-text-muted)]">
-              {["Branded banners sized for every platform", "Captions written and ready to paste", "New materials added regularly"].map((t) => (
-                <li key={t} className="flex items-center gap-2.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-yellow)]" /> {t}
-                </li>
-              ))}
-            </ul>
+            <h2 className="mt-1 font-[family-name:var(--font-display)] text-2xl font-bold text-white sm:text-3xl">
+              Frequently Asked Questions
+            </h2>
+          </div>
+
+          <div className="mt-8 space-y-3">
+            {FAQS.map((faq, idx) => {
+              const isOpen = openFaq === idx;
+              return (
+                <div
+                  key={idx}
+                  className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] transition-all overflow-hidden"
+                >
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : idx)}
+                    className="flex w-full items-center justify-between p-4 text-left text-xs font-bold text-white sm:text-sm"
+                  >
+                    <span>{faq.q}</span>
+                    <ChevronDown
+                      size={16}
+                      className={`text-[var(--color-text-muted)] transition-transform duration-200 ${
+                        isOpen ? "rotate-180 text-[var(--color-yellow)]" : ""
+                      }`}
+                    />
+                  </button>
+                  {isOpen && (
+                    <div className="px-4 pb-4 pt-1 text-xs leading-relaxed text-[var(--color-text-muted)] border-t border-[var(--color-border-subtle)]">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="border-t border-[var(--color-border)] bg-[var(--color-surface)]">
-        <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8 sm:py-28">
-          <p className="text-xs font-semibold uppercase tracking-wider text-[var(--color-yellow)]">FAQ</p>
-          <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight">Common questions</h2>
-
-          <div className="mt-10 space-y-3">
-            {[
-              { q: "Is it really free to join?", a: "Yes. There's no cost, no minimum referrals, and no expiry on your account." },
-              { q: "How much can I earn?", a: "You earn a percentage of the project value for every referral that converts into a paying client. Larger projects mean larger commissions — there's no cap." },
-              { q: "When do I get paid?", a: "Once a project you referred closes, our team confirms the details and approves your commission. Approved commissions are paid out via UPI or bank transfer." },
-              { q: "What counts as a referral?", a: "Anyone you introduce to Jsn Creative who goes on to become a paying client for web, app, design, or AI services." },
-              { q: "Can I refer more than one person?", a: "Yes — there's no limit. The more relevant referrals you bring in, the more you can earn." },
-            ].map((item) => (
-              <FaqItem key={item.q} q={item.q} a={item.a} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-        <div className="rounded-3xl border border-[var(--color-border)] bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-surface-raised)] p-10 text-center sm:p-16">
-          <h2 className="font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight sm:text-4xl">
-            Your network is worth more than you think
-          </h2>
-          <p className="mx-auto mt-4 max-w-md text-[var(--color-text-muted)]">
-            Join the Jsn Creative referral program today and turn the businesses you already know into real income.
-          </p>
-          <Link
-            to="/join"
-            className="mt-8 inline-flex items-center gap-1.5 rounded-full bg-[var(--color-yellow)] px-8 py-3.5 text-sm font-semibold text-[var(--color-ink)] transition hover:bg-[var(--color-amber)]"
-          >
-            Join free now <ArrowUpRight size={16} />
-          </Link>
-        </div>
-      </section>
+      {/* REFER MODAL / BOTTOM SHEET */}
+      <ReferModal
+        offering={selectedOffering}
+        isOpen={modalOpen}
+        onClose={() => {
+          setModalOpen(false);
+          setSelectedOffering(null);
+        }}
+      />
 
       <Footer />
-    </div>
-  );
-}
-
-function FaqItem({ q, a }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-ink)]">
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-medium text-[var(--color-text)]"
-        aria-expanded={open}
-      >
-        {q}
-        <ChevronDown size={16} className={`shrink-0 text-[var(--color-text-faint)] transition-transform ${open ? "rotate-180" : ""}`} />
-      </button>
-      {open && <p className="px-5 pb-4 text-sm leading-relaxed text-[var(--color-text-muted)]">{a}</p>}
     </div>
   );
 }

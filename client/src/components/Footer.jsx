@@ -4,12 +4,12 @@ import Logo from "./Logo";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--color-border)] bg-[var(--color-surface)]">
-      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
-        <div className="grid gap-10 md:grid-cols-4">
+    <footer className="border-t border-[var(--color-border)] bg-[var(--color-surface)] mb-14 md:mb-0">
+      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-14">
+        <div className="grid gap-8 md:grid-cols-4">
           <div>
             <Logo size="md" showTag={false} />
-            <p className="mt-3 max-w-xs text-sm text-[var(--color-text-muted)]">
+            <p className="mt-3 max-w-xs text-xs leading-relaxed text-[var(--color-text-muted)]">
               Web, app, and AI studio. This referral program is how we grow with the people who already trust us.
             </p>
           </div>
