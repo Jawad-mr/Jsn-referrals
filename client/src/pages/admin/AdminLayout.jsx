@@ -30,22 +30,23 @@ export default function AdminLayout() {
         </button>
       </div>
 
-      <div className="mx-auto flex max-w-7xl">
+      {/* Desktop & Mobile Main Layout */}
+      <div className="flex min-h-screen w-full">
         <aside
           className={`${
             mobileOpen ? "block" : "hidden"
-          } w-full border-b border-[var(--color-border)] px-5 py-4 md:sticky md:top-0 md:block md:h-screen md:w-64 md:border-b-0 md:border-r md:px-6 md:py-8`}
+          } w-full border-b border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-6 md:sticky md:top-0 md:block md:h-screen md:w-64 md:flex-shrink-0 md:border-b-0 md:border-r md:px-6 md:py-8`}
         >
           <div className="mb-8 hidden md:block">
             <Logo size="md" tagText="Admin" />
           </div>
 
-          <div className="mb-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3">
-            <p className="truncate text-sm font-medium">{user?.name}</p>
-            <p className="truncate text-xs text-[var(--color-text-faint)]">{user?.email}</p>
+          <div className="mb-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-ink)] px-4 py-3.5 shadow-sm">
+            <p className="truncate text-sm font-bold text-white">{user?.name}</p>
+            <p className="truncate text-xs text-[var(--color-text-muted)]">{user?.email}</p>
           </div>
 
-          <nav className="space-y-1">
+          <nav className="space-y-1.5">
             {links.map((l) => (
               <NavLink
                 key={l.to}
@@ -53,29 +54,31 @@ export default function AdminLayout() {
                 end={l.end}
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
+                  `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-xs font-bold uppercase tracking-wider transition ${
                     isActive
-                      ? "bg-[var(--color-yellow)] text-[var(--color-ink)]"
-                      : "text-[var(--color-text-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-text)]"
+                      ? "bg-[var(--color-yellow)] text-[var(--color-ink)] shadow-sm"
+                      : "text-[var(--color-text-muted)] hover:bg-[var(--color-surface-hover)] hover:text-white"
                   }`
                 }
               >
-                <l.icon size={17} />
+                <l.icon size={16} />
                 {l.label}
               </NavLink>
             ))}
           </nav>
 
-          <button
-            onClick={handleLogout}
-            className="mt-6 flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition hover:bg-[var(--color-surface)] hover:text-[var(--color-danger)]"
-          >
-            <LogOut size={17} />
-            Sign out
-          </button>
+          <div className="mt-8 border-t border-[var(--color-border)] pt-4">
+            <button
+              onClick={handleLogout}
+              className="flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-xs font-bold uppercase tracking-wider text-[var(--color-text-muted)] transition hover:bg-[var(--color-surface-hover)] hover:text-[var(--color-danger)]"
+            >
+              <LogOut size={16} />
+              Sign out
+            </button>
+          </div>
         </aside>
 
-        <main className="min-w-0 flex-1 px-5 py-8 sm:px-8 md:py-10">
+        <main className="min-w-0 flex-1 px-5 py-8 sm:px-10 md:py-10 max-w-6xl">
           <Outlet />
         </main>
       </div>

@@ -1,5 +1,5 @@
-// Official Brand Logo Component for JSN CREATIVE / REFER JSN
-// Matches the visual identity of https://www.jsncreative.studio/
+// Official Brand Logo Component for JSN CREATIVE & REFER JSN
+// Meaningful geometry: 'J' lettermark fused with an upward referral node (connection, reward & growth)
 
 export default function Logo({
   size = "md",
@@ -9,21 +9,21 @@ export default function Logo({
 }) {
   const sizeMap = {
     sm: {
-      box: "h-7 w-7 rounded-lg",
+      box: "h-8 w-8 rounded-xl",
       text: "text-sm",
       sub: "text-[10px]",
       tag: "text-[9px] px-1.5 py-0.5",
-      svgSize: "w-4 h-4",
+      svgSize: "w-4.5 h-4.5",
     },
     md: {
-      box: "h-9 w-9 rounded-xl",
+      box: "h-10 w-10 rounded-2xl",
       text: "text-base",
       sub: "text-xs",
       tag: "text-[10px] px-2 py-0.5",
-      svgSize: "w-5 h-5",
+      svgSize: "w-5.5 h-5.5",
     },
     lg: {
-      box: "h-12 w-12 rounded-2xl",
+      box: "h-13 w-13 rounded-2xl",
       text: "text-xl",
       sub: "text-sm",
       tag: "text-xs px-2.5 py-1",
@@ -37,55 +37,65 @@ export default function Logo({
     <div
       className={`inline-flex items-center gap-2.5 font-[family-name:var(--font-display)] select-none ${className}`}
     >
-      {/* Brand Icon Emblem */}
+      {/* Dynamic Emblem: Connected Growth 'J' + Spark Node */}
       <div
-        className={`relative flex ${s.box} items-center justify-center bg-black border border-[var(--color-yellow)]/40 shadow-[0_0_15px_rgba(245,197,24,0.2)] transition-all duration-300 flex-shrink-0`}
+        className={`relative flex ${s.box} items-center justify-center bg-gradient-to-br from-[#1C1F28] to-[#0A0C10] border border-[var(--color-yellow)]/50 shadow-[0_2px_16px_rgba(245,197,24,0.25)] flex-shrink-0 transition-transform active:scale-95`}
       >
-        {/* Inner gold glow accent */}
-        <div className="absolute inset-[1px] rounded-[inherit] border border-[var(--color-yellow)]/20 pointer-events-none" />
+        {/* Ambient inner rim */}
+        <div className="absolute inset-[1px] rounded-[inherit] border border-white/10 pointer-events-none" />
 
-        {/* JSN Monogram Icon */}
+        {/* Vector SVG Mark */}
         <svg
-          viewBox="0 0 36 36"
+          viewBox="0 0 40 40"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className={`${s.svgSize} text-[var(--color-yellow)]`}
+          className={s.svgSize}
         >
-          {/* Main bold geometric J stem & curve */}
+          {/* Interconnected referral bridge node */}
           <path
-            d="M20 7H28V22C28 26.4183 24.4183 30 20 30C15.5817 30 12 26.4183 12 22C12 20.8954 12.8954 20 14 20C15.1046 20 16 20.8954 16 22C16 24.2091 17.7909 26 20 26C22.2091 26 24 24.2091 24 22V11H20C18.8954 11 18 10.1046 18 9C18 7.89543 18.8954 7 20 7Z"
-            fill="currentColor"
-          />
-          {/* S & N dynamic energy lines */}
-          <path
-            d="M8 12C8 10.8954 8.89543 10 10 10H14C15.1046 10 16 10.8954 16 12C16 13.1046 15.1046 14 14 14H10C8.89543 14 8 13.1046 8 12Z"
+            d="M11 15C11 13.8954 11.8954 13 13 13H18C19.1046 13 20 13.8954 20 15C20 16.1046 19.1046 17 18 17H13C11.8954 17 11 16.1046 11 15Z"
             fill="#FFFFFF"
             fillOpacity="0.9"
           />
-          {/* Creative Spark Dot */}
-          <circle cx="28" cy="7" r="2.5" fill="#FFFFFF" />
+
+          {/* Upward Dynamic 'J' + Growth Loop */}
+          <path
+            d="M23 9C24.1046 9 25 9.89543 25 11V25C25 28.3137 22.3137 31 19 31C15.6863 31 13 28.3137 13 25C13 23.8954 13.8954 23 15 23C16.1046 23 17 23.8954 17 25C17 26.1046 17.8954 27 19 27C20.1046 27 21 26.1046 21 25V13H19C17.8954 13 17 12.1046 17 11C17 9.89543 17.8954 9 19 9H23Z"
+            fill="url(#yellowGradient)"
+          />
+
+          {/* Creative Beacon Spark */}
+          <circle cx="28" cy="11" r="3" fill="#FFFFFF" />
+          <circle cx="28" cy="11" r="1.5" fill="#F5C518" />
+
+          <defs>
+            <linearGradient id="yellowGradient" x1="13" y1="9" x2="25" y2="31" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#FFF275" />
+              <stop offset="0.6" stopColor="#F5C518" />
+              <stop offset="1" stopColor="#E09B00" />
+            </linearGradient>
+          </defs>
         </svg>
       </div>
 
-      {/* Brand Name Typography */}
-      <div className="flex items-center gap-2 leading-none">
-        <div className="flex flex-col">
-          <div className="flex items-center gap-1.5 font-bold tracking-tight">
-            <span className={`${s.text} text-white font-extrabold tracking-tight`}>
-              JSN
-            </span>
-            <span className={`${s.text} text-[var(--color-text-muted)] font-semibold tracking-tight`}>
-              CREATIVE
-            </span>
-            {showTag && (
-              <span
-                className={`rounded-md bg-[var(--color-yellow)] text-[var(--color-ink)] font-extrabold tracking-wider uppercase ml-1 ${s.tag}`}
-              >
-                {tagText}
-              </span>
-            )}
-          </div>
+      {/* Brand Typography */}
+      <div className="flex items-center gap-1.5 leading-none">
+        <div className="flex items-center gap-1">
+          <span className={`${s.text} font-extrabold tracking-tight text-white`}>
+            JSN
+          </span>
+          <span className={`${s.text} font-medium tracking-tight text-[var(--color-text-muted)]`}>
+            CREATIVE
+          </span>
         </div>
+
+        {showTag && (
+          <span
+            className={`rounded-md bg-[var(--color-yellow)] text-[var(--color-ink)] font-extrabold tracking-wider uppercase ml-1 shadow-[0_0_10px_rgba(245,197,24,0.3)] ${s.tag}`}
+          >
+            {tagText}
+          </span>
+        )}
       </div>
     </div>
   );
