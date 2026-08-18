@@ -87,7 +87,7 @@ export default function Catalog() {
               Explore Products &amp; Services
             </h1>
             <p className="max-w-xl text-xs leading-relaxed text-[var(--color-text-muted)] sm:text-sm">
-              Discover active software solutions and design services. Tap "Refer Now" on any offering to share with your network and earn 10% commission.
+              Discover active software solutions and design services. Tap "Refer Now" on any offering to share with your network and earn cash commissions.
             </p>
           </div>
 

@@ -63,7 +63,7 @@ export default function OfferingDetail() {
           </Link>
 
           <span className="rounded-full bg-[var(--color-surface)] border border-[var(--color-yellow)]/30 px-3 py-1 text-[11px] font-bold text-[var(--color-yellow)]">
-            10% Commission
+            Cash Commission
           </span>
         </div>
       </div>
@@ -98,7 +98,7 @@ export default function OfferingDetail() {
                 <div className="rounded-2xl border border-[var(--color-yellow)]/20 bg-[var(--color-yellow)]/10 p-3.5">
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-semibold text-white">💰 Referrer Payout</span>
-                    <span className="font-extrabold text-[var(--color-yellow)]">10% Cash Deal</span>
+                    <span className="font-extrabold text-[var(--color-yellow)]">Cash Commission</span>
                   </div>
                   <p className="mt-1 text-[11px] text-[var(--color-text-muted)]">
                     {item.commissionNote || "Earn on every client who completes this project or license."}

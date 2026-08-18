@@ -116,7 +116,7 @@ export default function ReferModal({ offering, isOpen, onClose }) {
         {/* Reward Pill Banner */}
         <div className="mt-4 flex items-center justify-between rounded-xl border border-[var(--color-yellow)]/25 bg-[var(--color-yellow)]/10 px-4 py-2.5 text-xs text-[var(--color-text)]">
           <span className="font-medium">💰 Referral Reward</span>
-          <span className="font-bold text-[var(--color-yellow)]">10% Commission Payout</span>
+          <span className="font-bold text-[var(--color-yellow)]">Cash Commission Payout</span>
         </div>
 
         {/* Direct Action Grid */}

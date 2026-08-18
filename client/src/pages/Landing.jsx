@@ -33,7 +33,7 @@ const FALLBACK_LEADERBOARD = [
 const FAQS = [
   {
     q: "How does Jsn Refer work?",
-    a: "You introduce clients, businesses, or friends who need website development, mobile apps, POS billing software, or AI solutions to Jsn Creative. When they close a project or software license, you earn a flat 10% cash commission.",
+    a: "You introduce clients, businesses, or friends who need website development, mobile apps, POS billing software, or AI solutions to Jsn Creative. When they close a project or software license, you earn cash commissions.",
   },
   {
     q: "Is there any cost or fee to join?",
@@ -84,7 +84,7 @@ export default function Landing() {
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="font-[family-name:var(--font-display)] text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.12]">
             Know someone who needs tech? <br />
-            <span className="text-[var(--color-yellow)]">Earn 10% commission on the deal.</span>
+            <span className="text-[var(--color-yellow)]">Get paid commission on every deal.</span>
           </h1>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[var(--color-text-muted)] sm:text-base">
@@ -115,7 +115,7 @@ export default function Landing() {
               <ShieldCheck size={16} className="text-[var(--color-mint)]" /> Zero Fees
             </span>
             <span className="flex items-center gap-1.5 font-semibold text-[var(--color-text-muted)]">
-              <Zap size={16} className="text-[var(--color-yellow)]" /> Flat 10% Commission
+              <Zap size={16} className="text-[var(--color-yellow)]" /> Direct Cash Commission
             </span>
             <span className="flex items-center gap-1.5 font-semibold text-[var(--color-text-muted)]">
               <Users size={16} className="text-[var(--color-amber)]" /> Instant Payout Tracking
@@ -174,7 +174,7 @@ export default function Landing() {
                 step: "03",
                 icon: Wallet,
                 title: "3. Earn Cash Commission",
-                desc: "When the project closes or software license is delivered, receive your 10% commission payout.",
+                desc: "When the project closes or software license is delivered, receive your cash commission payout.",
               },
             ].map((s) => (
               <div

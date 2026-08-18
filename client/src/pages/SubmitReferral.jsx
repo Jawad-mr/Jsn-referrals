@@ -75,7 +75,7 @@ export default function SubmitReferral() {
           Submit a Lead
         </h1>
         <p className="mt-1 text-xs text-[var(--color-text-muted)] sm:text-sm">
-          Introduce a business or client to Jsn Creative. We'll handle the sales pitch and credit your 10% commission.
+          Introduce a business or client to Jsn Creative. We'll handle the sales pitch and credit your cash commission.
         </p>
       </div>
 

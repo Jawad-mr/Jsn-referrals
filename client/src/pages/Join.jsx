@@ -48,7 +48,7 @@ export default function Join() {
           Create Account
         </h1>
         <p className="mt-0.5 text-center text-xs text-[var(--color-text-muted)]">
-          Join free &amp; get your 10% referral link instantly
+          Join free &amp; get your personal referral link instantly
         </p>
 
         {refCode && (

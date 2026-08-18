@@ -34,7 +34,7 @@ export const PRODUCTS = [
     image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80",
     officialUrl: "https://bakery-pos-system-woad.vercel.app/",
     studioUrl: "https://www.jsncreative.studio/bakery-pos.html",
-    commissionNote: "Earn up to 10% commission on every closed license deal.",
+    commissionNote: "Earn commission on every closed license deal.",
   },
   {
     id: "restaurant-pos",
