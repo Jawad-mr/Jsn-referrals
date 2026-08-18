@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { LayoutDashboard, Send, History, Image as ImageIcon, Wallet, LogOut, Menu, X } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import Logo from "../components/Logo";
 
 const links = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard, end: true },
@@ -25,10 +26,7 @@ export default function DashboardLayout() {
     <div className="min-h-screen bg-[var(--color-ink)]">
       {/* Mobile top bar */}
       <div className="flex items-center justify-between border-b border-[var(--color-border)] px-5 py-4 md:hidden">
-        <div className="flex items-center gap-2 font-[family-name:var(--font-display)] font-semibold">
-          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[var(--color-yellow)] text-sm font-bold text-[var(--color-ink)]">J</span>
-          Dashboard
-        </div>
+        <Logo size="sm" tagText="Dashboard" />
         <button onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
           {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -41,9 +39,8 @@ export default function DashboardLayout() {
             mobileOpen ? "block" : "hidden"
           } w-full border-b border-[var(--color-border)] px-5 py-4 md:sticky md:top-0 md:block md:h-screen md:w-64 md:border-b-0 md:border-r md:px-6 md:py-8`}
         >
-          <div className="mb-8 hidden items-center gap-2 font-[family-name:var(--font-display)] text-lg font-semibold md:flex">
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[var(--color-yellow)] font-bold text-[var(--color-ink)]">J</span>
-            Refer & Earn
+          <div className="mb-8 hidden md:block">
+            <Logo size="md" tagText="Refer" />
           </div>
 
           <div className="mb-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3">

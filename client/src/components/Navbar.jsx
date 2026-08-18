@@ -3,6 +3,8 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
+import Logo from "./Logo";
+
 const navLinks = [
   { to: "/#how-it-works", label: "How it works" },
   { to: "/#earnings", label: "Earnings" },
@@ -18,11 +20,8 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-ink)]/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
-        <Link to="/" className="flex items-center gap-2 font-[family-name:var(--font-display)] text-lg font-semibold tracking-tight">
-          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[var(--color-yellow)] font-bold text-[var(--color-ink)]">J</span>
-          <span>
-            Jsn Creative <span className="text-[var(--color-yellow)]">Refer</span>
-          </span>
+        <Link to="/" className="group flex items-center transition hover:opacity-95">
+          <Logo size="md" tagText="Refer" />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

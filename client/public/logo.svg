@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" fill="none">
+  <defs>
+    <linearGradient id="logo-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1F232D" />
+      <stop offset="100%" stop-color="#0F1117" />
+    </linearGradient>
+    <linearGradient id="logo-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF066" />
+      <stop offset="50%" stop-color="#F5C518" />
+      <stop offset="100%" stop-color="#E5A800" />
+    </linearGradient>
+  </defs>
+
+  <!-- Logo Mark Squircle -->
+  <rect x="2" y="2" width="56" height="56" rx="15" fill="url(#logo-bg)" stroke="#2C323F" stroke-width="2" />
+  <rect x="3" y="3" width="54" height="54" rx="14" fill="none" stroke="url(#logo-gold)" stroke-width="1" stroke-opacity="0.3" />
+
+  <!-- Stylized Geometric J -->
+  <path d="M20 16H40C41.6569 16 43 17.3431 43 19V21.5C43 23.1569 41.6569 24.5 40 24.5H32V35C32 39.4183 28.4183 43 24 43C19.5817 43 16 39.4183 16 35C16 33.3431 17.3431 32 19 32C20.6569 32 22 33.3431 22 35C22 36.1046 22.8954 37 24 37C25.1046 37 26 36.1046 26 35V24.5H20C18.3431 24.5 17 23.1569 17 21.5V19C17 17.3431 18.3431 16 20 16Z" fill="url(#logo-gold)" />
+  
+  <!-- Spark node -->
+  <circle cx="39" cy="35" r="3.5" fill="url(#logo-gold)" />
+
+  <!-- Typography -->
+  <text x="70" y="30" fill="#FFFFFF" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-weight="700" font-size="20" letter-spacing="-0.5">Jsn Creative</text>
+  <text x="70" y="47" fill="#F5C518" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-weight="600" font-size="13" letter-spacing="1.5">REFERRAL</text>
+</svg>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { AtSign, Share2, Mail } from "lucide-react";
+import Logo from "./Logo";
 
 export default function Footer() {
   return (
@@ -7,10 +8,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
-            <div className="flex items-center gap-2 font-[family-name:var(--font-display)] text-lg font-semibold">
-              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[var(--color-yellow)] font-bold text-[var(--color-ink)]">J</span>
-              Jsn Creative
-            </div>
+            <Logo size="md" showTag={false} />
             <p className="mt-3 max-w-xs text-sm text-[var(--color-text-muted)]">
               Web, app, and AI studio. This referral program is how we grow with the people who already trust us.
             </p>
