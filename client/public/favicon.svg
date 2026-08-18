@@ -1,29 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1E222D" />
-      <stop offset="100%" stop-color="#080A0E" />
-    </linearGradient>
-    <linearGradient id="yellowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FFF275" />
-      <stop offset="60%" stop-color="#F5C518" />
-      <stop offset="100%" stop-color="#D99100" />
-    </linearGradient>
-  </defs>
-
-  <!-- Deep Obsidian Shield Base -->
-  <rect width="64" height="64" rx="18" fill="url(#bgGrad)" stroke="#F5C518" stroke-width="2.5" stroke-opacity="0.6" />
-
-  <!-- Inner ambient line -->
-  <rect x="3" y="3" width="58" height="58" rx="15" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.1" />
-
-  <!-- Horizontal Connection Bridge -->
-  <rect x="18" y="21" width="12" height="6" rx="3" fill="#FFFFFF" fill-opacity="0.95" />
-
-  <!-- Upward Dynamic J Growth Hook -->
-  <path d="M37 14C38.6569 14 40 15.3431 40 17V39C40 44.5228 35.5228 49 30 49C24.4772 49 20 44.5228 20 39C20 37.3431 21.3431 36 23 36C24.6569 36 26 37.3431 26 39C26 41.2091 27.7909 43 30 43C32.2091 43 34 41.2091 34 39V20H30C28.3431 20 27 18.6569 27 17C27 15.3431 28.3431 14 30 14H37Z" fill="url(#yellowGrad)" />
-
-  <!-- Spark Beacon Node -->
-  <circle cx="45" cy="17" r="4.5" fill="#FFFFFF" />
-  <circle cx="45" cy="17" r="2" fill="#F5C518" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Deep Dark Rounded Background -->
+  <rect width="64" height="64" rx="16" fill="#0B0C0F" />
+  
+  <!-- Subtle Gold Border Accent -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="#F5C518" stroke-width="2" stroke-opacity="0.5" />
+  
+  <!-- Bold Rupee Symbol (₹) in Gold -->
+  <text 
+    x="32" 
+    y="46" 
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" 
+    font-size="42" 
+    font-weight="900" 
+    fill="#F5C518" 
+    text-anchor="middle"
+  >₹</text>
 </svg>
