@@ -26,11 +26,20 @@ export default function DashboardLayout() {
   return (
     <div className="min-h-screen bg-[var(--color-ink)]">
       {/* Mobile top bar */}
-      <div className="flex items-center justify-between border-b border-[var(--color-border)] px-5 py-4 md:hidden">
+      <div className="sticky top-0 z-30 flex items-center justify-between border-b border-[var(--color-border)] bg-[var(--color-ink)]/90 px-4 py-3.5 backdrop-blur-md md:hidden">
         <Logo size="sm" tagText="Dashboard" />
-        <button onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="flex items-center gap-2.5">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-yellow)] text-xs font-bold text-[var(--color-ink)]">
+            {user?.name?.charAt(0)?.toUpperCase() || "U"}
+          </div>
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+            className="rounded-lg p-1.5 text-[var(--color-text-muted)] hover:text-white"
+          >
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       <div className="mx-auto flex max-w-7xl">

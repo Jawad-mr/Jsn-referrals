@@ -20,6 +20,7 @@ import AdminOverview from "./pages/admin/AdminOverview";
 import AdminReferrals from "./pages/admin/AdminReferrals";
 import AdminReferrers from "./pages/admin/AdminReferrers";
 import AdminMaterials from "./pages/admin/AdminMaterials";
+import BottomNav from "./components/BottomNav";
 
 export default function App() {
   return (
@@ -65,6 +66,7 @@ export default function App() {
 
           <Route path="*" element={<Landing />} />
         </Routes>
+        <BottomNav />
       </AuthProvider>
     </BrowserRouter>
   );

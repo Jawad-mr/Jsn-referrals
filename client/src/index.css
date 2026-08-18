@@ -32,11 +32,28 @@ body {
   color: var(--color-text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* App-like bottom bar spacing on mobile screens */
+main, .app-content {
+  padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 768px) {
+  main, .app-content {
+    padding-bottom: 0;
+  }
 }
 
 ::selection {
   background-color: var(--color-yellow);
   color: var(--color-ink);
+}
+
+/* Tactile button active states */
+button, a {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Visible keyboard focus everywhere - accessibility floor */
