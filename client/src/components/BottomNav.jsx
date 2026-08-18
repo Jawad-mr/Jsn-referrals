@@ -20,8 +20,9 @@ export default function BottomNav() {
 
   const isDashboard = path.startsWith("/dashboard");
   const isAdmin = path.startsWith("/admin");
+  const isHome = path === "/";
 
-  if (isAdmin) return null; // Admin has its own desktop/mobile management
+  if (isAdmin || isHome) return null; // No bottom bar on home page as requested
 
   // Dashboard Nav Items (Logged-in referrer)
   const dashboardItems = [

@@ -1,5 +1,5 @@
-// Official Brand Logo Component for JSN CREATIVE & REFER JSN
-// Meaningful geometry: 'J' lettermark fused with an upward referral node (connection, reward & growth)
+// Official Brand Logo Component for JSN REFER
+// Clean, high-impact branding: 'JSN' + 'REFER'
 
 export default function Logo({
   size = "md",
@@ -16,18 +16,18 @@ export default function Logo({
       svgSize: "w-4.5 h-4.5",
     },
     md: {
-      box: "h-10 w-10 rounded-2xl",
+      box: "h-9 w-9 rounded-2xl",
       text: "text-base",
       sub: "text-xs",
       tag: "text-[10px] px-2 py-0.5",
-      svgSize: "w-5.5 h-5.5",
+      svgSize: "w-5 h-5",
     },
     lg: {
-      box: "h-13 w-13 rounded-2xl",
+      box: "h-12 w-12 rounded-2xl",
       text: "text-xl",
       sub: "text-sm",
       tag: "text-xs px-2.5 py-1",
-      svgSize: "w-7 h-7",
+      svgSize: "w-6 h-6",
     },
   };
 
@@ -35,13 +35,12 @@ export default function Logo({
 
   return (
     <div
-      className={`inline-flex items-center gap-2.5 font-[family-name:var(--font-display)] select-none ${className}`}
+      className={`inline-flex items-center gap-2 font-[family-name:var(--font-display)] select-none ${className}`}
     >
-      {/* Dynamic Emblem: Connected Growth 'J' + Spark Node */}
+      {/* Brand Icon Emblem */}
       <div
-        className={`relative flex ${s.box} items-center justify-center bg-gradient-to-br from-[#1C1F28] to-[#0A0C10] border border-[var(--color-yellow)]/50 shadow-[0_2px_16px_rgba(245,197,24,0.25)] flex-shrink-0 transition-transform active:scale-95`}
+        className={`relative flex ${s.box} items-center justify-center bg-gradient-to-br from-[#1C1F28] to-[#0A0C10] border border-[var(--color-yellow)]/50 shadow-[0_2px_14px_rgba(245,197,24,0.22)] flex-shrink-0`}
       >
-        {/* Ambient inner rim */}
         <div className="absolute inset-[1px] rounded-[inherit] border border-white/10 pointer-events-none" />
 
         {/* Vector SVG Mark */}
@@ -51,20 +50,18 @@ export default function Logo({
           xmlns="http://www.w3.org/2000/svg"
           className={s.svgSize}
         >
-          {/* Interconnected referral bridge node */}
+          {/* Bridge link */}
           <path
             d="M11 15C11 13.8954 11.8954 13 13 13H18C19.1046 13 20 13.8954 20 15C20 16.1046 19.1046 17 18 17H13C11.8954 17 11 16.1046 11 15Z"
             fill="#FFFFFF"
-            fillOpacity="0.9"
+            fillOpacity="0.95"
           />
-
-          {/* Upward Dynamic 'J' + Growth Loop */}
+          {/* Upward Dynamic J Loop */}
           <path
             d="M23 9C24.1046 9 25 9.89543 25 11V25C25 28.3137 22.3137 31 19 31C15.6863 31 13 28.3137 13 25C13 23.8954 13.8954 23 15 23C16.1046 23 17 23.8954 17 25C17 26.1046 17.8954 27 19 27C20.1046 27 21 26.1046 21 25V13H19C17.8954 13 17 12.1046 17 11C17 9.89543 17.8954 9 19 9H23Z"
             fill="url(#yellowGradient)"
           />
-
-          {/* Creative Beacon Spark */}
+          {/* Spark Beacon */}
           <circle cx="28" cy="11" r="3" fill="#FFFFFF" />
           <circle cx="28" cy="11" r="1.5" fill="#F5C518" />
 
@@ -78,24 +75,14 @@ export default function Logo({
         </svg>
       </div>
 
-      {/* Brand Typography */}
+      {/* Brand Typography: JSN REFER */}
       <div className="flex items-center gap-1.5 leading-none">
-        <div className="flex items-center gap-1">
-          <span className={`${s.text} font-extrabold tracking-tight text-white`}>
-            JSN
-          </span>
-          <span className={`${s.text} font-medium tracking-tight text-[var(--color-text-muted)]`}>
-            CREATIVE
-          </span>
-        </div>
-
-        {showTag && (
-          <span
-            className={`rounded-md bg-[var(--color-yellow)] text-[var(--color-ink)] font-extrabold tracking-wider uppercase ml-1 shadow-[0_0_10px_rgba(245,197,24,0.3)] ${s.tag}`}
-          >
-            {tagText}
-          </span>
-        )}
+        <span className={`${s.text} font-extrabold tracking-tight text-white`}>
+          JSN
+        </span>
+        <span className={`${s.text} font-bold tracking-tight text-[var(--color-yellow)]`}>
+          REFER
+        </span>
       </div>
     </div>
   );
