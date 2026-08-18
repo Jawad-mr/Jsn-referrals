@@ -18,6 +18,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Tell Express it is behind a reverse proxy (Render load balancer)
+app.set("trust proxy", 1);
+
 // --- Core middleware ---
 app.use(helmet());
 app.use(compression());
