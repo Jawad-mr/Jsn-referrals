@@ -44,6 +44,8 @@ export default function App() {
             }
           >
             <Route index element={<DashboardOverview />} />
+            <Route path="products" element={<Catalog />} />
+            <Route path="products/:slug" element={<OfferingDetail />} />
             <Route path="refer" element={<SubmitReferral />} />
             <Route path="history" element={<ReferralHistory />} />
             <Route path="materials" element={<Materials />} />

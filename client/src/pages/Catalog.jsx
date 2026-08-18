@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
 import {
   Search,
   Package,
@@ -27,6 +27,8 @@ const FILTER_TABS = [
 ];
 
 export default function Catalog() {
+  const location = useLocation();
+  const isDashboard = location.pathname.startsWith("/dashboard");
   const [searchParams, setSearchParams] = useSearchParams();
   const initialFilter = searchParams.get("filter") || "all";
   const [activeFilter, setActiveFilter] = useState(initialFilter);
@@ -71,12 +73,12 @@ export default function Catalog() {
   const serviceCount = filteredItems.filter((i) => i.type === "service").length;
 
   return (
-    <div className="min-h-screen bg-[var(--color-ink)] text-[var(--color-text)] app-screen-container">
-      <Navbar />
+    <div className={`${isDashboard ? "" : "min-h-screen bg-[var(--color-ink)] text-[var(--color-text)] app-screen-container"}`}>
+      {!isDashboard && <Navbar />}
 
       {/* DISCOVERY APP HEADER */}
-      <section className="border-b border-[var(--color-border)] bg-[var(--color-surface)]/30 px-4 py-8 sm:px-8 sm:py-12">
-        <div className="mx-auto max-w-7xl">
+      <section className={`${isDashboard ? "mb-8" : "border-b border-[var(--color-border)] bg-[var(--color-surface)]/30 px-4 py-8 sm:px-8 sm:py-12"}`}>
+        <div className={`${isDashboard ? "" : "mx-auto max-w-7xl"}`}>
           <div className="flex flex-col gap-2">
             <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[var(--color-yellow)]">
               <Sparkles size={13} /> Official Jsn Creative Studio Catalog
@@ -289,7 +291,7 @@ export default function Catalog() {
         }}
       />
 
-      <Footer />
+      {!isDashboard && <Footer />}
     </div>
   );
 }

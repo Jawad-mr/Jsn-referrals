@@ -74,31 +74,25 @@ export default function Landing() {
     <div className="min-h-screen bg-[var(--color-ink)] text-[var(--color-text)]">
       <Navbar />
 
-      {/* HERO SECTION — FOCUSED ON JOIN & SIGN IN */}
-      <section className="relative overflow-hidden border-b border-[var(--color-border)] px-4 pt-12 pb-16 sm:px-8 sm:pt-20 sm:pb-20">
+      {/* HERO SECTION — FOCUSED ON JOIN & ALREADY A USER */}
+      <section className="relative overflow-hidden border-b border-[var(--color-border)] px-4 pt-14 pb-16 sm:px-8 sm:pt-20 sm:pb-20">
         <div
           className="pointer-events-none absolute -top-32 right-[-5%] h-[420px] w-[420px] rounded-full opacity-20 blur-[110px]"
           style={{ background: "radial-gradient(circle, var(--color-yellow), transparent 70%)" }}
         />
 
         <div className="mx-auto max-w-4xl text-center">
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[var(--color-surface)] px-4 py-1.5 text-xs font-semibold text-[var(--color-text-muted)] shadow-sm">
-            <span className="h-2 w-2 rounded-full bg-[var(--color-mint)] animate-pulse" />
-            Official Jsn Creative Referral Program
-          </div>
-
-          <h1 className="mt-6 font-[family-name:var(--font-display)] text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.12]">
+          <h1 className="font-[family-name:var(--font-display)] text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.12]">
             Know someone who needs tech? <br />
-            <span className="text-[var(--color-yellow)]">Get paid for the intro.</span>
+            <span className="text-[var(--color-yellow)]">Earn 10% commission on the deal.</span>
           </h1>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[var(--color-text-muted)] sm:text-base">
-            Refer businesses to JSN Creative for websites, mobile apps, bakery/restaurant POS software, or AI solutions. Earn a flat <strong>10% cash commission</strong> on every closed deal.
+            Refer businesses to JSN Creative for websites, mobile apps, bakery/restaurant POS software, or AI solutions. Earn cash payouts on every closed project.
           </p>
 
           {/* MAIN SIGN IN & JOIN ACTIONS */}
-          <div className="mt-9 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               to="/join"
               className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl bg-[var(--color-yellow)] px-8 py-4 text-sm font-bold uppercase tracking-wider text-[var(--color-ink)] shadow-xl transition active:scale-95 hover:bg-[var(--color-amber)]"
@@ -111,14 +105,14 @@ export default function Landing() {
               className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition active:scale-95 hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]"
             >
               <LogIn size={17} />
-              Sign in to Account
+              Already a user?
             </Link>
           </div>
 
           {/* Micro Value Props */}
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-5 text-xs text-[var(--color-text-faint)] sm:gap-8">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-5 text-xs text-[var(--color-text-faint)] sm:gap-8">
             <span className="flex items-center gap-1.5 font-semibold text-[var(--color-text-muted)]">
-              <ShieldCheck size={16} className="text-[var(--color-mint)]" /> Zero Fees or Quotas
+              <ShieldCheck size={16} className="text-[var(--color-mint)]" /> Zero Fees
             </span>
             <span className="flex items-center gap-1.5 font-semibold text-[var(--color-text-muted)]">
               <Zap size={16} className="text-[var(--color-yellow)]" /> Flat 10% Commission
@@ -130,8 +124,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* LIVE EARNINGS TICKER */}
-      <div className="border-b border-[var(--color-border)] bg-[var(--color-surface)] py-3">
+      {/* LIVE EARNINGS TICKER (HIDDEN ON PHONE) */}
+      <div className="hidden sm:block border-b border-[var(--color-border)] bg-[var(--color-surface)] py-3">
         <div className="overflow-hidden">
           <div className="ticker-track flex w-max gap-8 whitespace-nowrap">
             {tickerItems.map((item, i) => (
@@ -341,7 +335,7 @@ export default function Landing() {
                 to="/login"
                 className="w-full sm:w-auto rounded-2xl border border-[var(--color-border)] bg-[var(--color-ink)] px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition active:scale-95 hover:border-[var(--color-yellow)]"
               >
-                Sign In
+                Already a user?
               </Link>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import {
   ArrowLeft,
   Share2,
@@ -18,6 +18,8 @@ import { getOfferingBySlug, ALL_OFFERINGS } from "../data/catalog";
 
 export default function OfferingDetail() {
   const { slug } = useParams();
+  const location = useLocation();
+  const isDashboard = location.pathname.startsWith("/dashboard");
   const [modalOpen, setModalOpen] = useState(false);
 
   const item = getOfferingBySlug(slug);
@@ -25,20 +27,20 @@ export default function OfferingDetail() {
   if (!item) {
     return (
       <div className="min-h-screen bg-[var(--color-ink)] text-white app-screen-container">
-        <Navbar />
+        {!isDashboard && <Navbar />}
         <div className="mx-auto max-w-md px-5 py-24 text-center">
           <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold">Offering not found</h1>
           <p className="mt-2 text-xs text-[var(--color-text-muted)]">
             The product or service you're looking for doesn't exist or has moved.
           </p>
           <Link
-            to="/products-services"
+            to={isDashboard ? "/dashboard/products" : "/products-services"}
             className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-[var(--color-yellow)] px-5 py-2.5 text-xs font-bold text-[var(--color-ink)]"
           >
             <ArrowLeft size={14} /> Back to Catalog
           </Link>
         </div>
-        <Footer />
+        {!isDashboard && <Footer />}
       </div>
     );
   }
@@ -47,14 +49,14 @@ export default function OfferingDetail() {
   const otherOfferings = ALL_OFFERINGS.filter((o) => o.id !== item.id).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-[var(--color-ink)] text-[var(--color-text)] app-screen-container">
-      <Navbar />
+    <div className={`${isDashboard ? "" : "min-h-screen bg-[var(--color-ink)] text-[var(--color-text)] app-screen-container"}`}>
+      {!isDashboard && <Navbar />}
 
       {/* TOP NAVIGATION BAR */}
       <div className="sticky top-0 z-30 border-b border-[var(--color-border)] bg-[var(--color-ink)]/90 py-3 backdrop-blur-md">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 sm:px-8">
+        <div className={`${isDashboard ? "" : "mx-auto max-w-5xl px-4 sm:px-8"} flex items-center justify-between`}>
           <Link
-            to="/products-services"
+            to={isDashboard ? "/dashboard/products" : "/products-services"}
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--color-text-muted)] transition active:scale-95 hover:text-white"
           >
             <ArrowLeft size={16} /> All Offerings
@@ -252,7 +254,7 @@ export default function OfferingDetail() {
         onClose={() => setModalOpen(false)}
       />
 
-      <Footer />
+      {!isDashboard && <Footer />}
     </div>
   );
 }

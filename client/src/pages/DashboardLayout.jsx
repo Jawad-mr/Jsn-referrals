@@ -6,8 +6,8 @@ import Logo from "../components/Logo";
 
 const links = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard, end: true },
+  { to: "/dashboard/products", label: "Products & Services", icon: Sparkles },
   { to: "/dashboard/refer", label: "New referral", icon: Send },
-  { to: "/products-services", label: "Products & Services", icon: Sparkles },
   { to: "/dashboard/history", label: "My referrals", icon: History },
   { to: "/dashboard/materials", label: "Materials", icon: ImageIcon },
   { to: "/dashboard/earnings", label: "Earnings", icon: Wallet },
