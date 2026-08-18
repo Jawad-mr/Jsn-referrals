@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Send } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Send, Sparkles } from "lucide-react";
 import api from "../lib/api";
 import { Spinner } from "../components/ui";
 
@@ -8,24 +8,42 @@ const services = [
   "Web Development",
   "App Development",
   "Custom Software",
-  "Graphic Designing",
-  "Video Editing",
+  "Bakery POS App",
+  "Restaurant POS App",
+  "Gym Management App",
+  "Hotel Management App",
+  "AI Chatbot",
+  "AI Solutions",
   "UI/UX Design",
   "SEO Services",
-  "AI Solutions",
+  "Graphic Designing",
+  "Video Editing",
   "Digital Marketing",
+  "Educational Consultancy",
+  "E-Books",
   "Other",
 ];
 
 export default function SubmitReferral() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const prefilledService = searchParams.get("service") || searchParams.get("item") || services[0];
+
   const [form, setForm] = useState({
     leadName: "",
     leadEmail: "",
     leadPhone: "",
-    serviceInterested: services[0],
+    serviceInterested: services.includes(prefilledService) ? prefilledService : services[0],
     notes: "",
   });
+
+  useEffect(() => {
+    const s = searchParams.get("service") || searchParams.get("item");
+    if (s && services.includes(s)) {
+      setForm((f) => ({ ...f, serviceInterested: s }));
+    }
+  }, [searchParams]);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -56,6 +74,12 @@ export default function SubmitReferral() {
       <p className="mt-1 text-sm text-[var(--color-text-muted)]">
         Tell us about the business or person you're referring. We'll take it from here.
       </p>
+
+      {form.serviceInterested && form.serviceInterested !== "Web Development" && (
+        <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-yellow)]/30 bg-[var(--color-yellow)]/10 px-3.5 py-1.5 text-xs font-semibold text-[var(--color-yellow)]">
+          <Sparkles size={13} /> Preselected Offering: {form.serviceInterested}
+        </div>
+      )}
 
       {success && (
         <div className="mt-6 rounded-xl border border-[var(--color-mint)]/30 bg-[var(--color-mint)]/10 px-4 py-3 text-sm text-[var(--color-mint)]">

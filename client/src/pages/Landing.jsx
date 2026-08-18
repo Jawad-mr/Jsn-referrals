@@ -144,6 +144,116 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* PRODUCTS & SERVICES DISCOVERY PREVIEW */}
+      <section id="offerings-preview" className="border-t border-[var(--color-border)] bg-[var(--color-surface)]/40 py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-[var(--color-yellow)]">
+                Products &amp; Services
+              </p>
+              <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight sm:text-4xl">
+                What you're referring &amp; earning on
+              </h2>
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-[var(--color-text-muted)]">
+                Explore real, in-demand products &amp; services engineered by Jsn Creative. Refer any of them to businesses in your network.
+              </p>
+            </div>
+
+            <Link
+              to="/products-services"
+              className="inline-flex items-center gap-1.5 font-semibold text-xs text-[var(--color-yellow)] hover:underline"
+            >
+              Explore all products &amp; services (16+) →
+            </Link>
+          </div>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                slug: "bakery-pos",
+                name: "Bakery POS App",
+                type: "Product",
+                category: "POS & Billing",
+                desc: "Complete point-of-sale system for bakeries — inventory, orders, and daily sales in one place.",
+                image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80",
+              },
+              {
+                slug: "restaurant-pos",
+                name: "Restaurant POS App",
+                type: "Product",
+                category: "POS & Billing",
+                desc: "Table management, kitchen display, and billing — everything a modern restaurant needs.",
+                image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=600&q=80",
+              },
+              {
+                slug: "web-development",
+                name: "Web Development",
+                type: "Service",
+                category: "Development",
+                desc: "Fast, modern websites and web applications built with the latest technologies.",
+                image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80",
+              },
+              {
+                slug: "ai-solutions",
+                name: "AI Solutions & Integration",
+                type: "Service",
+                category: "AI & Automation",
+                desc: "Custom AI models, chatbots, and intelligent automation for business workflows.",
+                image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=600&q=80",
+              },
+            ].map((item) => (
+              <div
+                key={item.slug}
+                className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition hover:-translate-y-1 hover:border-[var(--color-yellow)]/50"
+              >
+                <div>
+                  <div className="relative mb-3.5 h-36 w-full overflow-hidden rounded-xl bg-[var(--color-ink)]">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <span className="absolute left-2.5 top-2.5 rounded-full bg-[var(--color-yellow)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[var(--color-ink)]">
+                      {item.type}
+                    </span>
+                  </div>
+                  <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-white group-hover:text-[var(--color-yellow)]">
+                    {item.name}
+                  </h3>
+                  <p className="mt-1 line-clamp-2 text-xs text-[var(--color-text-muted)]">{item.desc}</p>
+                </div>
+
+                <div className="mt-4 flex items-center justify-between border-t border-[var(--color-border)] pt-3 text-xs">
+                  <Link
+                    to={`/products-services/${item.slug}`}
+                    className="font-medium text-[var(--color-text-muted)] hover:text-white"
+                  >
+                    View Details
+                  </Link>
+                  <Link
+                    to={`/products-services/${item.slug}`}
+                    className="font-semibold text-[var(--color-yellow)] hover:underline"
+                  >
+                    Refer Deal →
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <Link
+              to="/products-services"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-ink)] px-6 py-3 text-xs font-bold text-white transition hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]"
+            >
+              Browse Full Products &amp; Services Catalog <ArrowUpRight size={14} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* EARNINGS / SOCIAL PROOF */}
       <section id="earnings" className="border-y border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">

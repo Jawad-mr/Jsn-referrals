@@ -5,6 +5,8 @@ import { ProtectedRoute, AdminRoute } from "./components/RouteGuards";
 import Landing from "./pages/Landing";
 import Join from "./pages/Join";
 import Login from "./pages/Login";
+import Catalog from "./pages/Catalog";
+import OfferingDetail from "./pages/OfferingDetail";
 
 import DashboardLayout from "./pages/DashboardLayout";
 import DashboardOverview from "./pages/DashboardOverview";
@@ -27,6 +29,10 @@ export default function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/join" element={<Join />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/products-services" element={<Catalog />} />
+          <Route path="/products-services/:slug" element={<OfferingDetail />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/catalog/:slug" element={<OfferingDetail />} />
 
           <Route
             path="/dashboard"

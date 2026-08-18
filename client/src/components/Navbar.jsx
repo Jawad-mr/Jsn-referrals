@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import Logo from "./Logo";
 
 const navLinks = [
+  { to: "/products-services", label: "Products & Services", isRouterLink: true, highlight: true },
   { to: "/#how-it-works", label: "How it works" },
   { to: "/#earnings", label: "Earnings" },
   { to: "/#materials-preview", label: "Materials" },
@@ -25,15 +26,29 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
-          {navLinks.map((l) => (
-            <a
-              key={l.to}
-              href={l.to}
-              className="text-sm text-[var(--color-text-muted)] transition hover:text-[var(--color-text)]"
-            >
-              {l.label}
-            </a>
-          ))}
+          {navLinks.map((l) =>
+            l.isRouterLink ? (
+              <Link
+                key={l.to}
+                to={l.to}
+                className={`text-sm font-medium transition ${
+                  l.highlight
+                    ? "text-[var(--color-yellow)] hover:text-white"
+                    : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+                }`}
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <a
+                key={l.to}
+                href={l.to}
+                className="text-sm text-[var(--color-text-muted)] transition hover:text-[var(--color-text)]"
+              >
+                {l.label}
+              </a>
+            )
+          )}
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
@@ -75,11 +90,24 @@ export default function Navbar() {
       {open && (
         <div className="border-t border-[var(--color-border)] bg-[var(--color-ink)] px-5 py-5 md:hidden">
           <div className="flex flex-col gap-4">
-            {navLinks.map((l) => (
-              <a key={l.to} href={l.to} onClick={() => setOpen(false)} className="text-sm text-[var(--color-text-muted)]">
-                {l.label}
-              </a>
-            ))}
+            {navLinks.map((l) =>
+              l.isRouterLink ? (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  onClick={() => setOpen(false)}
+                  className={`text-sm font-medium ${
+                    l.highlight ? "text-[var(--color-yellow)]" : "text-[var(--color-text-muted)]"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              ) : (
+                <a key={l.to} href={l.to} onClick={() => setOpen(false)} className="text-sm text-[var(--color-text-muted)]">
+                  {l.label}
+                </a>
+              )
+            )}
             <div className="mt-2 flex flex-col gap-3 border-t border-[var(--color-border)] pt-4">
               {user ? (
                 <button

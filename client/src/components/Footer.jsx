@@ -17,6 +17,7 @@ export default function Footer() {
           <div>
             <h4 className="font-[family-name:var(--font-display)] text-sm font-semibold text-[var(--color-text)]">Program</h4>
             <ul className="mt-4 space-y-2.5 text-sm text-[var(--color-text-muted)]">
+              <li><Link to="/products-services" className="text-[var(--color-yellow)] hover:underline">Products &amp; Services</Link></li>
               <li><a href="/#how-it-works" className="hover:text-[var(--color-text)]">How it works</a></li>
               <li><a href="/#earnings" className="hover:text-[var(--color-text)]">Earnings</a></li>
               <li><Link to="/join" className="hover:text-[var(--color-text)]">Join the program</Link></li>
