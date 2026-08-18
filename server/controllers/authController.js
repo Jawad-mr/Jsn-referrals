@@ -36,7 +36,8 @@ export async function register(req, res) {
 
     res.status(201).json({ user: user.toPublicJSON(), accessToken });
   } catch (err) {
-    res.status(500).json({ message: "Something went wrong creating your account. Please try again." });
+    console.error("[register] Error:", err);
+    res.status(500).json({ message: err.message || "Something went wrong creating your account. Please try again." });
   }
 }
 
