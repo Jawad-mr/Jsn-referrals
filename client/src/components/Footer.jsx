@@ -38,8 +38,14 @@ export default function Footer() {
 
           <div>
             <h4 className="font-[family-name:var(--font-display)] text-sm font-semibold text-[var(--color-text)]">Get in touch</h4>
+            <p className="mt-3 text-xs text-[var(--color-text-muted)]">
+              Support Desk: <a href="tel:7204351696" className="font-mono font-bold text-white hover:text-[var(--color-yellow)]">+91 7204351696</a>
+            </p>
+            <p className="mt-1 text-xs text-[var(--color-text-muted)]">
+              Email: <a href="mailto:jsn.creators@gmail.com" className="text-[var(--color-yellow)] hover:underline">jsn.creators@gmail.com</a>
+            </p>
             <div className="mt-4 flex gap-3">
-              <a href="mailto:hello@jsncreative.studio" aria-label="Email" className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)] transition hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]">
+              <a href="mailto:jsn.creators@gmail.com" aria-label="Email" className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)] transition hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]">
                 <Mail size={16} />
               </a>
               <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)] transition hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]">

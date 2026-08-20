@@ -66,10 +66,11 @@ export default function DashboardLayout() {
         <div className="flex items-center gap-2">
           <NavLink
             to="/dashboard/profile"
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-yellow)] text-xs font-black text-[var(--color-ink)] shadow-sm transition active:scale-95"
+            className="flex items-center gap-1.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-xs font-bold text-white transition active:scale-95 hover:border-[var(--color-yellow)]"
             title="View Profile"
           >
-            {userInitial}
+            <User size={14} className="text-[var(--color-yellow)]" />
+            <span>Profile</span>
           </NavLink>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -112,17 +113,15 @@ export default function DashboardLayout() {
         <NavLink
           to="/dashboard/profile"
           onClick={() => setMobileOpen(false)}
-          className="group mb-6 flex items-center gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-ink)] p-3 transition hover:border-[var(--color-yellow)]/50"
+          className="group mb-6 block rounded-2xl border border-[var(--color-border)] bg-[var(--color-ink)] p-3.5 transition hover:border-[var(--color-yellow)]/50"
         >
-          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-[var(--color-yellow)] text-xs font-black text-[var(--color-ink)]">
-            {userInitial}
-          </div>
-          <div className="min-w-0 flex-1">
+          <div className="flex items-center justify-between">
             <p className="truncate text-xs font-bold text-white group-hover:text-[var(--color-yellow)]">
               {user?.name || "Referrer"}
             </p>
-            <p className="truncate text-[10px] text-[var(--color-text-muted)]">{user?.email}</p>
+            <span className="text-[9px] font-bold uppercase text-[var(--color-mint)]">Verified</span>
           </div>
+          <p className="truncate text-[10px] text-[var(--color-text-muted)] mt-0.5">{user?.email}</p>
         </NavLink>
 
         {/* Navigation Links */}

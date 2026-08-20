@@ -1,15 +1,15 @@
 export function StatCard({ label, value, sub, accent = false }) {
   return (
-    <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
-      <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-text-muted)]">{label}</p>
+    <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-sm">
+      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">{label}</p>
       <p
-        className={`mt-2 font-[family-name:var(--font-mono)] text-2xl font-semibold ${
-          accent ? "text-[var(--color-yellow)]" : "text-[var(--color-text)]"
+        className={`mt-2 font-[family-name:var(--font-number)] text-2xl sm:text-3xl font-extrabold tracking-tight font-number ${
+          accent ? "text-[var(--color-yellow)]" : "text-white"
         }`}
       >
         {value}
       </p>
-      {sub && <p className="mt-1 text-xs text-[var(--color-text-faint)]">{sub}</p>}
+      {sub && <p className="mt-1 text-xs text-[var(--color-text-faint)] font-medium">{sub}</p>}
     </div>
   );
 }

@@ -51,7 +51,6 @@ export default function Support() {
   function handleSubmitTicket(e) {
     e.preventDefault();
     setLoading(true);
-    // Simulate support ticket dispatch & mailto trigger
     setTimeout(() => {
       setLoading(false);
       setSuccess(true);
@@ -71,65 +70,92 @@ export default function Support() {
           Help &amp; Support
         </h1>
         <p className="mt-1 text-xs sm:text-sm text-[var(--color-text-muted)] max-w-xl">
-          Need help with lead tracking, deal closures, or instant payout verification? Our partner team is here for you.
+          Need help with lead tracking, deal closures, or instant payout verification? Our partner desk is ready to help.
         </p>
       </div>
 
       {/* Instant Contact Channels */}
-      <div className="grid gap-4 sm:grid-cols-2">
-        {/* WhatsApp Channel */}
-        <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 sm:p-6 shadow-xl flex flex-col justify-between hover:border-[var(--color-mint)]/40 transition">
+      <div className="grid gap-4 sm:grid-cols-3">
+        {/* Direct Phone Call */}
+        <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-xl flex flex-col justify-between hover:border-[var(--color-yellow)]/40 transition">
           <div>
             <div className="flex items-center justify-between">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-mint)]/15 text-[var(--color-mint)]">
-                <MessageSquare size={22} />
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-yellow)]/15 text-[var(--color-yellow)]">
+                <PhoneCall size={20} />
               </div>
-              <span className="flex items-center gap-1.5 rounded-full bg-[var(--color-mint)]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase text-[var(--color-mint)]">
-                <Clock size={11} /> 15 Min Response
+              <span className="flex items-center gap-1.5 rounded-full bg-[var(--color-yellow)]/10 px-2 py-0.5 text-[9px] font-bold uppercase text-[var(--color-yellow)]">
+                Direct Line
               </span>
             </div>
-            <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-white mt-4">
-              WhatsApp Partner Desk
+            <h3 className="font-[family-name:var(--font-display)] text-sm font-bold text-white mt-4">
+              Phone Support
             </h3>
-            <p className="text-xs text-[var(--color-text-muted)] mt-1 leading-relaxed">
-              Instant chat with our partner relationship managers for deal verification, custom software quotes, and expedited payouts.
+            <p className="text-[11px] text-[var(--color-text-muted)] mt-1 leading-relaxed">
+              Call our partner helpline directly for urgent deal discussions.
             </p>
           </div>
 
           <a
-            href={`https://wa.me/?text=${whatsappMessage}`}
+            href="tel:7204351696"
+            className="mt-5 flex items-center justify-center gap-2 rounded-2xl border border-[var(--color-border)] bg-[var(--color-ink)] px-4 py-2.5 font-mono text-xs font-bold text-white transition active:scale-95 hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]"
+          >
+            +91 7204351696 <PhoneCall size={13} />
+          </a>
+        </div>
+
+        {/* WhatsApp Channel */}
+        <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-xl flex flex-col justify-between hover:border-[var(--color-mint)]/40 transition">
+          <div>
+            <div className="flex items-center justify-between">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-mint)]/15 text-[var(--color-mint)]">
+                <MessageSquare size={20} />
+              </div>
+              <span className="flex items-center gap-1.5 rounded-full bg-[var(--color-mint)]/10 px-2 py-0.5 text-[9px] font-bold uppercase text-[var(--color-mint)]">
+                <Clock size={11} /> Fast Reply
+              </span>
+            </div>
+            <h3 className="font-[family-name:var(--font-display)] text-sm font-bold text-white mt-4">
+              WhatsApp Desk
+            </h3>
+            <p className="text-[11px] text-[var(--color-text-muted)] mt-1 leading-relaxed">
+              Instant 1-on-1 chat for deal tracking, custom quotes &amp; payouts.
+            </p>
+          </div>
+
+          <a
+            href={`https://wa.me/917204351696?text=${whatsappMessage}`}
             target="_blank"
             rel="noreferrer"
-            className="mt-6 flex items-center justify-center gap-2 rounded-2xl bg-[var(--color-mint)] px-5 py-3 text-xs font-bold uppercase tracking-wider text-[var(--color-ink)] shadow-md transition active:scale-95 hover:bg-[var(--color-mint)]/90"
+            className="mt-5 flex items-center justify-center gap-2 rounded-2xl bg-[var(--color-mint)] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[var(--color-ink)] shadow-md transition active:scale-95 hover:bg-[var(--color-mint)]/90"
           >
-            Chat on WhatsApp <ExternalLink size={14} />
+            WhatsApp <ExternalLink size={13} />
           </a>
         </div>
 
         {/* Email Support Channel */}
-        <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 sm:p-6 shadow-xl flex flex-col justify-between hover:border-[var(--color-yellow)]/40 transition">
+        <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 shadow-xl flex flex-col justify-between hover:border-[var(--color-yellow)]/40 transition">
           <div>
             <div className="flex items-center justify-between">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-yellow)]/15 text-[var(--color-yellow)]">
-                <Mail size={22} />
+                <Mail size={20} />
               </div>
-              <span className="flex items-center gap-1.5 rounded-full bg-[var(--color-yellow)]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase text-[var(--color-yellow)]">
-                Official Support
+              <span className="flex items-center gap-1.5 rounded-full bg-[var(--color-yellow)]/10 px-2 py-0.5 text-[9px] font-bold uppercase text-[var(--color-yellow)]">
+                Official Inbox
               </span>
             </div>
-            <h3 className="font-[family-name:var(--font-display)] text-base font-bold text-white mt-4">
-              Email Desk
+            <h3 className="font-[family-name:var(--font-display)] text-sm font-bold text-white mt-4">
+              Email Help Desk
             </h3>
-            <p className="text-xs text-[var(--color-text-muted)] mt-1 leading-relaxed">
-              Send formal project proposals, enterprise client requirements, or account verification queries directly to our studio inbox.
+            <p className="text-[11px] text-[var(--color-text-muted)] mt-1 leading-relaxed">
+              Send formal project proposals or account queries directly.
             </p>
           </div>
 
           <a
-            href="mailto:hello@jsncreative.studio?subject=JSN%20Referral%20Partner%20Inquiry"
-            className="mt-6 flex items-center justify-center gap-2 rounded-2xl border border-[var(--color-border)] bg-[var(--color-ink)] px-5 py-3 text-xs font-bold uppercase tracking-wider text-white transition active:scale-95 hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]"
+            href="mailto:jsn.creators@gmail.com?subject=JSN%20Referral%20Partner%20Inquiry"
+            className="mt-5 flex items-center justify-center gap-1.5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-ink)] px-4 py-2.5 text-[11px] font-bold text-white truncate transition active:scale-95 hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]"
           >
-            Email: hello@jsncreative.studio <ExternalLink size={14} />
+            <span className="truncate">jsn.creators@gmail.com</span> <ExternalLink size={12} className="flex-shrink-0" />
           </a>
         </div>
       </div>

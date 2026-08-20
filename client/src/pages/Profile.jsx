@@ -163,22 +163,17 @@ export default function Profile() {
           style={{ background: "radial-gradient(circle, var(--color-yellow), transparent 70%)" }}
         />
 
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between relative z-10">
-          <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-tr from-[var(--color-amber)] to-[var(--color-yellow)] text-2xl font-black text-[var(--color-ink)] shadow-[0_4px_20px_rgba(245,197,24,0.3)]">
-              {userInitial}
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between relative z-10">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <h1 className="font-[family-name:var(--font-display)] text-xl font-extrabold text-white sm:text-2xl truncate">
+                {user?.name || "Partner Account"}
+              </h1>
+              <span className="flex items-center gap-1 rounded-full bg-[var(--color-mint)]/10 border border-[var(--color-mint)]/30 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[var(--color-mint)]">
+                <ShieldCheck size={12} /> Verified Partner
+              </span>
             </div>
-            <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <h1 className="font-[family-name:var(--font-display)] text-xl font-extrabold text-white sm:text-2xl truncate">
-                  {user?.name || "Partner"}
-                </h1>
-                <span className="flex items-center gap-1 rounded-full bg-[var(--color-mint)]/10 border border-[var(--color-mint)]/30 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[var(--color-mint)]">
-                  <ShieldCheck size={12} /> Verified
-                </span>
-              </div>
-              <p className="text-xs text-[var(--color-text-muted)] mt-0.5 truncate">{user?.email}</p>
-            </div>
+            <p className="text-xs text-[var(--color-text-muted)] mt-1 truncate">{user?.email}</p>
           </div>
 
           {/* Quick Referral Chip */}
@@ -186,7 +181,7 @@ export default function Profile() {
             onClick={copyReferralLink}
             className="flex items-center justify-between gap-3 rounded-2xl border border-[var(--color-yellow)]/30 bg-[var(--color-yellow)]/10 px-4 py-2.5 text-xs font-bold text-[var(--color-yellow)] transition active:scale-95 hover:bg-[var(--color-yellow)]/20"
           >
-            <span className="font-mono">Ref: {user?.referralCode}</span>
+            <span className="font-mono">Ref Code: {user?.referralCode}</span>
             {copiedLink ? <Check size={14} className="text-[var(--color-mint)]" /> : <Copy size={14} />}
           </button>
         </div>
@@ -195,7 +190,7 @@ export default function Profile() {
         <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 border-t border-[var(--color-border)] pt-5">
           <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-ink)]/60 p-3">
             <span className="text-[10px] font-semibold uppercase text-[var(--color-text-faint)]">Earnings Paid</span>
-            <p className="mt-0.5 font-mono text-sm font-bold text-[var(--color-yellow)]">{formatINR(user?.paidOut || 0)}</p>
+            <p className="mt-0.5 font-[family-name:var(--font-number)] text-base font-extrabold text-[var(--color-yellow)] font-number">{formatINR(user?.paidOut || 0)}</p>
           </div>
           <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-ink)]/60 p-3">
             <span className="text-[10px] font-semibold uppercase text-[var(--color-text-faint)]">Payout Status</span>
@@ -204,7 +199,7 @@ export default function Profile() {
             </p>
           </div>
           <div className="col-span-2 sm:col-span-1 rounded-2xl border border-[var(--color-border)] bg-[var(--color-ink)]/60 p-3">
-            <span className="text-[10px] font-semibold uppercase text-[var(--color-text-faint)]">Encryption</span>
+            <span className="text-[10px] font-semibold uppercase text-[var(--color-text-faint)]">Security</span>
             <p className="mt-0.5 text-sm font-bold text-white flex items-center gap-1">
               <Lock size={13} className="text-[var(--color-mint)]" /> AES-256-GCM
             </p>

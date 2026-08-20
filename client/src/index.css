@@ -26,6 +26,7 @@
   --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+  --font-number: "Outfit", "Space Grotesk", sans-serif;
 }
 
 @theme {
@@ -53,6 +54,13 @@
   --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+  --font-number: "Outfit", "Space Grotesk", sans-serif;
+}
+
+/* Professional tabular number styling */
+.font-number, .font-mono, [data-number] {
+  font-feature-settings: "tnum" 1, "zero" 1;
+  font-variant-numeric: tabular-nums;
 }
 
 html {

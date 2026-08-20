@@ -140,8 +140,12 @@ export default function Terms() {
             </h2>
             <p>
               For questions regarding commission payouts, terms of service, or enterprise referrals, contact our partner desk at{" "}
-              <a href="mailto:hello@jsncreative.studio" className="font-semibold text-[var(--color-yellow)] hover:underline">
-                hello@jsncreative.studio
+              <a href="mailto:jsn.creators@gmail.com" className="font-semibold text-[var(--color-yellow)] hover:underline">
+                jsn.creators@gmail.com
+              </a>{" "}
+              or phone/WhatsApp helpline at{" "}
+              <a href="tel:7204351696" className="font-mono font-bold text-white hover:text-[var(--color-yellow)]">
+                +91 7204351696
               </a>
               .
             </p>
