@@ -5,8 +5,6 @@ import {
   Share2,
   Users,
   Wallet,
-  ShieldCheck,
-  Zap,
   ChevronDown,
   LogIn,
   CheckCircle2,
@@ -75,51 +73,38 @@ export default function Landing() {
       <Navbar />
 
       {/* HERO SECTION — FOCUSED ON JOIN & ALREADY A USER */}
-      <section className="relative overflow-hidden border-b border-[var(--color-border)] px-4 pt-14 pb-16 sm:px-8 sm:pt-20 sm:pb-20">
+      <section className="relative overflow-hidden border-b border-[var(--color-border)] px-3 pt-12 pb-14 sm:px-8 sm:pt-20 sm:pb-20">
         <div
           className="pointer-events-none absolute -top-32 right-[-5%] h-[420px] w-[420px] rounded-full opacity-20 blur-[110px]"
           style={{ background: "radial-gradient(circle, var(--color-yellow), transparent 70%)" }}
         />
 
-        <div className="mx-auto max-w-4xl text-center">
-          <h1 className="font-[family-name:var(--font-display)] text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.12]">
+        <div className="mx-auto w-full max-w-4xl text-center">
+          <h1 className="font-[family-name:var(--font-display)] text-2xl xs:text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.15]">
             Know someone who needs tech? <br />
             <span className="text-[var(--color-yellow)]">Get paid commission on every deal.</span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[var(--color-text-muted)] sm:text-base">
+          <p className="mx-auto mt-4 max-w-2xl text-xs sm:text-base leading-relaxed text-[var(--color-text-muted)]">
             Refer businesses to JSN Creative for websites, mobile apps, bakery/restaurant POS software, or AI solutions. Earn cash payouts on every closed project.
           </p>
 
           {/* MAIN SIGN IN & JOIN ACTIONS */}
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row w-full sm:w-auto">
             <Link
               to="/join"
-              className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl bg-[var(--color-yellow)] px-8 py-4 text-sm font-bold uppercase tracking-wider text-[var(--color-ink)] shadow-xl transition active:scale-95 hover:bg-[var(--color-amber)]"
+              className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl bg-[var(--color-yellow)] px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--color-ink)] shadow-xl transition active:scale-95 hover:bg-[var(--color-amber)]"
             >
               Join Free &amp; Start Earning <ArrowUpRight size={17} />
             </Link>
 
             <Link
               to="/login"
-              className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition active:scale-95 hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]"
+              className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition active:scale-95 hover:border-[var(--color-yellow)] hover:text-[var(--color-yellow)]"
             >
               <LogIn size={17} />
               Already a user?
             </Link>
-          </div>
-
-          {/* Micro Value Props */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-5 text-xs text-[var(--color-text-faint)] sm:gap-8">
-            <span className="flex items-center gap-1.5 font-semibold text-[var(--color-text-muted)]">
-              <ShieldCheck size={16} className="text-[var(--color-mint)]" /> Zero Fees
-            </span>
-            <span className="flex items-center gap-1.5 font-semibold text-[var(--color-text-muted)]">
-              <Zap size={16} className="text-[var(--color-yellow)]" /> Direct Cash Commission
-            </span>
-            <span className="flex items-center gap-1.5 font-semibold text-[var(--color-text-muted)]">
-              <Users size={16} className="text-[var(--color-amber)]" /> Instant Payout Tracking
-            </span>
           </div>
         </div>
       </section>

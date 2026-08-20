@@ -7,6 +7,7 @@ import Join from "./pages/Join";
 import Login from "./pages/Login";
 import Catalog from "./pages/Catalog";
 import OfferingDetail from "./pages/OfferingDetail";
+import Terms from "./pages/Terms";
 
 import DashboardLayout from "./pages/DashboardLayout";
 import DashboardOverview from "./pages/DashboardOverview";
@@ -14,6 +15,7 @@ import SubmitReferral from "./pages/SubmitReferral";
 import ReferralHistory from "./pages/ReferralHistory";
 import Materials from "./pages/Materials";
 import Earnings from "./pages/Earnings";
+import Profile from "./pages/Profile";
 
 import AdminLayout from "./pages/admin/AdminLayout";
 import AdminOverview from "./pages/admin/AdminOverview";
@@ -30,6 +32,7 @@ export default function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/join" element={<Join />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="/products-services" element={<Catalog />} />
           <Route path="/products-services/:slug" element={<OfferingDetail />} />
           <Route path="/catalog" element={<Catalog />} />
@@ -50,6 +53,7 @@ export default function App() {
             <Route path="history" element={<ReferralHistory />} />
             <Route path="materials" element={<Materials />} />
             <Route path="earnings" element={<Earnings />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
 
           <Route
@@ -73,3 +77,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+

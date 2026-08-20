@@ -53,36 +53,52 @@ export default function DashboardOverview() {
       <p className="mt-1 text-sm text-[var(--color-text-muted)]">Here's how your referrals are doing.</p>
 
       {/* Referral link card */}
-      <div className="mt-7 rounded-2xl border border-[var(--color-yellow)]/25 bg-gradient-to-br from-[var(--color-yellow)]/10 to-[var(--color-surface)] p-6">
-        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-yellow)]">Your referral link</p>
-        <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <code className="flex-1 truncate rounded-xl border border-[var(--color-border)] bg-[var(--color-ink)] px-4 py-3 font-[family-name:var(--font-mono)] text-sm text-[var(--color-text)]">
+      <div className="mt-6 rounded-3xl border border-[var(--color-yellow)]/25 bg-gradient-to-br from-[var(--color-yellow)]/10 to-[var(--color-surface)] p-5 sm:p-6 shadow-lg">
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-yellow)]">Your Referral Link</p>
+          <span className="font-mono text-[10px] text-[var(--color-text-muted)]">Code: <strong className="text-white">{user?.referralCode}</strong></span>
+        </div>
+        <div className="mt-3 flex flex-col gap-2.5 sm:flex-row sm:items-center">
+          <code className="flex-1 truncate rounded-xl border border-[var(--color-border)] bg-[var(--color-ink)] px-3.5 py-2.5 font-[family-name:var(--font-mono)] text-xs sm:text-sm text-[var(--color-text)]">
             {link}
           </code>
           <div className="flex gap-2">
             <button
               onClick={copyLink}
-              className="flex items-center gap-1.5 rounded-xl bg-[var(--color-yellow)] px-4 py-3 text-sm font-semibold text-[var(--color-ink)] transition hover:bg-[var(--color-amber)]"
+              className="flex flex-1 sm:flex-none items-center justify-center gap-1.5 rounded-xl bg-[var(--color-yellow)] px-4 py-2.5 text-xs font-bold text-[var(--color-ink)] transition active:scale-95 hover:bg-[var(--color-amber)]"
             >
-              {copied ? <Check size={15} /> : <Copy size={15} />}
-              {copied ? "Copied" : "Copy"}
+              {copied ? <Check size={14} /> : <Copy size={14} />}
+              {copied ? "Copied" : "Copy Link"}
             </button>
             <button
               onClick={shareWhatsapp}
-              className="flex items-center gap-1.5 rounded-xl border border-[var(--color-border)] px-4 py-3 text-sm font-semibold text-[var(--color-text)] transition hover:border-[var(--color-mint)] hover:text-[var(--color-mint)]"
+              className="flex flex-1 sm:flex-none items-center justify-center gap-1.5 rounded-xl border border-[var(--color-border)] bg-[var(--color-ink)] px-4 py-2.5 text-xs font-semibold text-[var(--color-text)] transition active:scale-95 hover:border-[var(--color-mint)] hover:text-[var(--color-mint)]"
             >
-              <Share2 size={15} />
+              <Share2 size={14} />
               Share
             </button>
           </div>
         </div>
-        <p className="mt-3 font-[family-name:var(--font-mono)] text-xs text-[var(--color-text-faint)]">
-          Referral code: {user?.referralCode}
-        </p>
       </div>
 
+      {/* Payout Details Prompt if not yet configured */}
+      {!user?.hasPayoutDetails && (
+        <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-[var(--color-mint)]/30 bg-[var(--color-mint)]/5 p-4">
+          <div>
+            <p className="text-xs font-bold text-white">Add your UPI ID for Instant Payouts</p>
+            <p className="text-[11px] text-[var(--color-text-muted)]">Your bank / UPI details are encrypted with AES-256 for secure payouts.</p>
+          </div>
+          <Link
+            to="/dashboard/profile"
+            className="inline-flex items-center justify-center rounded-xl bg-[var(--color-mint)]/20 border border-[var(--color-mint)]/40 px-3.5 py-1.5 text-xs font-bold text-[var(--color-mint)] hover:bg-[var(--color-mint)] hover:text-[var(--color-ink)] transition active:scale-95"
+          >
+            Setup Payout ID &rarr;
+          </Link>
+        </div>
+      )}
+
       {/* Stats grid */}
-      <div className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4">
         <StatCard label="Total earnings" value={formatINR(stats?.totalEarnings)} accent />
         <StatCard label="Pending commission" value={formatINR(stats?.pendingEarnings)} />
         <StatCard label="Paid out" value={formatINR(stats?.paidOut)} />

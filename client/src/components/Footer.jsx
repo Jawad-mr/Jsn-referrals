@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { AtSign, Share2, Mail } from "lucide-react";
+import { AtSign, Share2, Mail, ShieldCheck } from "lucide-react";
 import Logo from "./Logo";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--color-border)] bg-[var(--color-surface)] mb-14 md:mb-0">
-      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-14">
+    <footer className="w-full border-t border-[var(--color-border)] bg-[var(--color-surface)] pb-8 pt-2">
+      <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
         <div className="grid gap-8 md:grid-cols-4">
           <div>
             <Logo size="md" showTag={false} />
@@ -16,20 +16,22 @@ export default function Footer() {
 
           <div>
             <h4 className="font-[family-name:var(--font-display)] text-sm font-semibold text-[var(--color-text)]">Program</h4>
-            <ul className="mt-4 space-y-2.5 text-sm text-[var(--color-text-muted)]">
+            <ul className="mt-4 space-y-2.5 text-xs sm:text-sm text-[var(--color-text-muted)]">
               <li><Link to="/products-services" className="text-[var(--color-yellow)] hover:underline">Products &amp; Services</Link></li>
               <li><a href="/#how-it-works" className="hover:text-[var(--color-text)]">How it works</a></li>
               <li><a href="/#earnings" className="hover:text-[var(--color-text)]">Earnings</a></li>
               <li><Link to="/join" className="hover:text-[var(--color-text)]">Join the program</Link></li>
+              <li><Link to="/terms" className="hover:text-[var(--color-text)]">Terms &amp; Conditions</Link></li>
               <li><a href="/#faq" className="hover:text-[var(--color-text)]">FAQ</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-[family-name:var(--font-display)] text-sm font-semibold text-[var(--color-text)]">Jsn Creative</h4>
-            <ul className="mt-4 space-y-2.5 text-sm text-[var(--color-text-muted)]">
+            <ul className="mt-4 space-y-2.5 text-xs sm:text-sm text-[var(--color-text-muted)]">
               <li><a href="https://www.jsncreative.studio/" target="_blank" rel="noreferrer" className="hover:text-[var(--color-text)]">Main studio site</a></li>
               <li><Link to="/login" className="hover:text-[var(--color-text)]">Referrer sign in</Link></li>
+              <li><Link to="/terms" className="hover:text-[var(--color-text)]">Privacy &amp; Terms</Link></li>
             </ul>
           </div>
 
@@ -49,11 +51,16 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-[var(--color-border)] pt-6 text-xs text-[var(--color-text-faint)] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-2 border-t border-[var(--color-border)] pt-6 text-[11px] sm:text-xs text-[var(--color-text-faint)] sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Jsn Creative. All rights reserved.</p>
-          <p>Commissions are paid on approved, completed projects only.</p>
+          <div className="flex items-center gap-4">
+            <Link to="/terms" className="hover:text-[var(--color-yellow)]">Terms of Service</Link>
+            <span>&bull;</span>
+            <p>Commissions are paid on approved, completed projects only.</p>
+          </div>
         </div>
       </div>
     </footer>
   );
 }
+

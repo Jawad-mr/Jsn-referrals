@@ -26,7 +26,7 @@ export default function OfferingDetail() {
 
   if (!item) {
     return (
-      <div className="min-h-screen bg-[var(--color-ink)] text-white app-screen-container">
+      <div className="min-h-screen bg-[var(--color-ink)] text-white">
         {!isDashboard && <Navbar />}
         <div className="mx-auto max-w-md px-5 py-24 text-center">
           <h1 className="font-[family-name:var(--font-display)] text-2xl font-bold">Offering not found</h1>
@@ -49,7 +49,7 @@ export default function OfferingDetail() {
   const otherOfferings = ALL_OFFERINGS.filter((o) => o.id !== item.id).slice(0, 3);
 
   return (
-    <div className={`${isDashboard ? "" : "min-h-screen bg-[var(--color-ink)] text-[var(--color-text)] app-screen-container"}`}>
+    <div className={`${isDashboard ? "" : "min-h-screen bg-[var(--color-ink)] text-[var(--color-text)]"}`}>
       {!isDashboard && <Navbar />}
 
       {/* TOP NAVIGATION BAR */}

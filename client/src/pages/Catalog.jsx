@@ -73,7 +73,7 @@ export default function Catalog() {
   const serviceCount = filteredItems.filter((i) => i.type === "service").length;
 
   return (
-    <div className={`${isDashboard ? "" : "min-h-screen bg-[var(--color-ink)] text-[var(--color-text)] app-screen-container"}`}>
+    <div className={`${isDashboard ? "" : "min-h-screen bg-[var(--color-ink)] text-[var(--color-text)]"}`}>
       {!isDashboard && <Navbar />}
 
       {/* DISCOVERY APP HEADER */}
@@ -188,7 +188,7 @@ export default function Catalog() {
                     </span>
                   </div>
 
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid grid-cols-2 gap-2.5 sm:gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {filteredItems
                       .filter((i) => i.type === "product")
                       .map((p) => (
@@ -216,7 +216,7 @@ export default function Catalog() {
                     </span>
                   </div>
 
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid grid-cols-2 gap-2.5 sm:gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {filteredItems
                       .filter((i) => i.type === "service")
                       .map((s) => (

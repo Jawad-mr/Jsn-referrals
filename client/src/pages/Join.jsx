@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowRight, AlertCircle, Sparkles } from "lucide-react";
+import { ArrowRight, AlertCircle, Sparkles, CheckSquare, Square } from "lucide-react";
 import Logo from "../components/Logo";
 import { useAuth } from "../context/AuthContext";
 import { Spinner } from "../components/ui";
@@ -12,6 +12,7 @@ export default function Join() {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({ name: "", email: "", phone: "", password: "" });
+  const [acceptTerms, setAcceptTerms] = useState(true);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -22,9 +23,15 @@ export default function Join() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
+
+    if (!acceptTerms) {
+      setError("Please accept the Terms & Conditions to create an account.");
+      return;
+    }
+
     setLoading(true);
     try {
-      await register({ ...form, refCode });
+      await register({ ...form, refCode, acceptTerms: true });
       navigate("/dashboard");
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed. Please verify your details.");
@@ -34,7 +41,7 @@ export default function Join() {
   }
 
   return (
-    <div className="flex h-screen max-h-screen w-full flex-col justify-center items-center overflow-hidden bg-[var(--color-ink)] px-4 py-3">
+    <div className="flex min-h-screen w-full flex-col justify-center items-center bg-[var(--color-ink)] px-4 py-8 sm:py-12">
       {/* Brand Header */}
       <div className="mb-4 flex flex-col items-center">
         <Link to="/" className="transition active:scale-95">
@@ -64,7 +71,7 @@ export default function Join() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="mt-4 space-y-2.5">
+        <form onSubmit={handleSubmit} className="mt-4 space-y-3">
           <div>
             <span className="mb-1 block text-[11px] font-semibold text-[var(--color-text-muted)]">Full Name</span>
             <input
@@ -72,7 +79,7 @@ export default function Join() {
               required
               value={form.name}
               onChange={(e) => update("name", e.target.value)}
-              className="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-ink)] px-3 py-2 text-xs text-white outline-none transition focus:border-[var(--color-yellow)]"
+              className="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-ink)] px-3 py-2.5 text-xs text-white outline-none transition focus:border-[var(--color-yellow)]"
               placeholder="Your full name"
             />
           </div>
@@ -84,7 +91,7 @@ export default function Join() {
               required
               value={form.email}
               onChange={(e) => update("email", e.target.value)}
-              className="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-ink)] px-3 py-2 text-xs text-white outline-none transition focus:border-[var(--color-yellow)]"
+              className="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-ink)] px-3 py-2.5 text-xs text-white outline-none transition focus:border-[var(--color-yellow)]"
               placeholder="you@example.com"
             />
           </div>
@@ -96,7 +103,7 @@ export default function Join() {
                 type="tel"
                 value={form.phone}
                 onChange={(e) => update("phone", e.target.value)}
-                className="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-ink)] px-3 py-2 text-xs text-white outline-none transition focus:border-[var(--color-yellow)]"
+                className="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-ink)] px-3 py-2.5 text-xs text-white outline-none transition focus:border-[var(--color-yellow)]"
                 placeholder="+91"
               />
             </div>
@@ -109,10 +116,34 @@ export default function Join() {
                 minLength={6}
                 value={form.password}
                 onChange={(e) => update("password", e.target.value)}
-                className="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-ink)] px-3 py-2 text-xs text-white outline-none transition focus:border-[var(--color-yellow)]"
+                className="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-ink)] px-3 py-2.5 text-xs text-white outline-none transition focus:border-[var(--color-yellow)]"
                 placeholder="6+ chars"
               />
             </div>
+          </div>
+
+          {/* Terms and Conditions Checkbox */}
+          <div className="pt-1">
+            <label className="flex items-start gap-2.5 cursor-pointer text-[11px] text-[var(--color-text-muted)] select-none">
+              <input
+                type="checkbox"
+                checked={acceptTerms}
+                onChange={(e) => setAcceptTerms(e.target.checked)}
+                className="mt-0.5 h-4 w-4 rounded border-[var(--color-border)] bg-[var(--color-ink)] accent-[var(--color-yellow)] text-[var(--color-ink)] focus:ring-0"
+              />
+              <span>
+                I agree to the{" "}
+                <Link
+                  to="/terms"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-[var(--color-yellow)] hover:underline"
+                >
+                  Terms &amp; Conditions
+                </Link>{" "}
+                and Referral Partner Agreement.
+              </span>
+            </label>
           </div>
 
           <div className="pt-2">
@@ -136,3 +167,4 @@ export default function Join() {
     </div>
   );
 }
+

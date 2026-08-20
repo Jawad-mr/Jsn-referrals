@@ -28,7 +28,7 @@ export default function Login() {
   }
 
   return (
-    <div className="flex h-screen max-h-screen w-full flex-col justify-center items-center overflow-hidden bg-[var(--color-ink)] px-4 py-4">
+    <div className="flex min-h-screen w-full flex-col justify-center items-center bg-[var(--color-ink)] px-4 py-8 sm:py-12">
       {/* Top Header Logo */}
       <div className="mb-6 flex flex-col items-center">
         <Link to="/" className="transition active:scale-95">

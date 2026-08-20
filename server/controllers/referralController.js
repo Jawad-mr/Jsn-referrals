@@ -3,11 +3,17 @@ import User from "../models/User.js";
 
 export async function submitReferral(req, res) {
   try {
-    const { leadName, leadEmail, leadPhone, serviceInterested, notes } = req.body;
+    let { leadName, leadEmail, leadPhone, serviceInterested, notes } = req.body;
 
     if (!leadName || !leadPhone || !serviceInterested) {
       return res.status(400).json({ message: "Lead name, phone, and service are required." });
     }
+
+    leadName = String(leadName).trim().slice(0, 100);
+    leadEmail = leadEmail ? String(leadEmail).trim().toLowerCase().slice(0, 120) : "";
+    leadPhone = String(leadPhone).trim().slice(0, 30);
+    serviceInterested = String(serviceInterested).trim().slice(0, 150);
+    notes = notes ? String(notes).trim().slice(0, 1000) : "";
 
     const referral = await Referral.create({
       referrer: req.user._id,
@@ -20,6 +26,7 @@ export async function submitReferral(req, res) {
 
     res.status(201).json({ referral });
   } catch (err) {
+    console.error("[submitReferral] Error:", err);
     res.status(500).json({ message: "Could not submit your referral. Please try again." });
   }
 }
