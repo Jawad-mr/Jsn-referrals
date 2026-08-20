@@ -73,7 +73,7 @@ export default function Landing() {
       <Navbar />
 
       {/* HERO SECTION — FULL VIEWPORT FOLD ON OPENING */}
-      <section className="relative min-h-[calc(100svh-4rem)] flex flex-col justify-between overflow-hidden border-b border-[var(--color-border)] px-4 pt-10 pb-8 sm:px-8 sm:pt-20 sm:pb-16">
+      <section className="relative min-h-[calc(100svh-4rem)] flex flex-col justify-between overflow-hidden border-b border-[var(--color-border)] px-2.5 pt-8 pb-8 sm:px-8 sm:pt-20 sm:pb-16">
         <div
           className="pointer-events-none absolute -top-32 right-[-5%] h-[500px] w-[500px] rounded-full opacity-25 blur-[120px]"
           style={{ background: "radial-gradient(circle, var(--color-yellow), transparent 70%)" }}
@@ -82,22 +82,18 @@ export default function Landing() {
         {/* Empty placeholder for flex alignment */}
         <div className="hidden sm:block" />
 
-        <div className="mx-auto w-full max-w-5xl text-center my-auto py-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-yellow)]/30 bg-[var(--color-yellow)]/10 px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--color-yellow)] mb-5">
-            <Share2 size={13} /> Official JSN Creative Referral Network
-          </div>
-
-          <h1 className="font-[family-name:var(--font-display)] text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
+        <div className="mx-auto w-full max-w-5xl text-center my-auto py-4 px-1 sm:px-4">
+          <h1 className="font-[family-name:var(--font-display)] text-[2rem] xs:text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
             Know someone who needs tech? <br />
             <span className="text-[var(--color-yellow)]">Get paid commission on every deal.</span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-2xl text-xs sm:text-base leading-relaxed text-[var(--color-text-muted)]">
+          <p className="mx-auto mt-4 sm:mt-5 max-w-3xl text-xs sm:text-base leading-relaxed text-[var(--color-text-muted)] px-2 sm:px-0">
             Refer businesses to JSN Creative for websites, mobile apps, bakery/restaurant POS software, or AI solutions. Earn cash payouts on every closed project.
           </p>
 
           {/* MAIN SIGN IN & JOIN ACTIONS */}
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row w-full sm:w-auto max-w-md mx-auto sm:max-w-none">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row w-full sm:w-auto max-w-sm mx-auto sm:max-w-none">
             <Link
               to="/join"
               className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl bg-[var(--color-yellow)] px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--color-ink)] shadow-xl transition active:scale-95 hover:bg-[var(--color-amber)]"
