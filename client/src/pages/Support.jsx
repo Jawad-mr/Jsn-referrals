@@ -34,6 +34,9 @@ const SUPPORT_FAQS = [
   },
 ];
 
+const FORMSPREE_ENDPOINT =
+  import.meta.env.VITE_FORMSPREE_SUPPORT_URL || "https://formspree.io/f/mkjwkawd";
+
 export default function Support() {
   const { user } = useAuth();
 
@@ -42,21 +45,53 @@ export default function Support() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
   const [openFaq, setOpenFaq] = useState(null);
 
   const whatsappMessage = encodeURIComponent(
     `Hi JSN Creative Support Team! I'm ${user?.name || "a partner"} (Ref Code: ${user?.referralCode || "N/A"}). I need assistance with my referral partner account.`
   );
 
-  function handleSubmitTicket(e) {
+  async function handleSubmitTicket(e) {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    setError("");
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: user?.name || "Partner",
+          email: user?.email || "",
+          phone: user?.phone || "",
+          referralCode: user?.referralCode || "N/A",
+          category,
+          subject,
+          message,
+        }),
+      });
+
+      if (response.ok) {
+        setSuccess(true);
+        setSubject("");
+        setMessage("");
+      } else {
+        const data = await response.json().catch(() => null);
+        if (data && data.errors) {
+          setError(data.errors.map((err) => err.message).join(", "));
+        } else {
+          setError("Failed to send message. Please try again or reach out via WhatsApp / Email.");
+        }
+      }
+    } catch (err) {
+      setError("Network error while submitting your message. Please try again or use direct contact channels.");
+    } finally {
       setLoading(false);
-      setSuccess(true);
-      setSubject("");
-      setMessage("");
-    }, 800);
+    }
   }
 
   return (
@@ -188,6 +223,13 @@ export default function Support() {
               </div>
             ) : (
               <form onSubmit={handleSubmitTicket} className="mt-5 space-y-4">
+                {error && (
+                  <div className="flex items-start gap-2.5 rounded-2xl border border-[var(--color-coral)]/30 bg-[var(--color-coral)]/10 p-3.5 text-xs text-[var(--color-coral)]">
+                    <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
+                    <span>{error}</span>
+                  </div>
+                )}
+
                 <div>
                   <label className="mb-1.5 block text-xs font-semibold text-[var(--color-text-muted)]">
                     Inquiry Category
