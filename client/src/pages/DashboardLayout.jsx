@@ -12,6 +12,7 @@ import {
   Sparkles,
   User,
   ShieldCheck,
+  HelpCircle,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../components/Logo";
@@ -24,6 +25,7 @@ const links = [
   { to: "/dashboard/materials", label: "Materials", icon: ImageIcon },
   { to: "/dashboard/earnings", label: "Earnings", icon: Wallet },
   { to: "/dashboard/profile", label: "Profile & Payouts", icon: User },
+  { to: "/dashboard/support", label: "Help & Support", icon: HelpCircle },
 ];
 
 export default function DashboardLayout() {
@@ -88,9 +90,9 @@ export default function DashboardLayout() {
         />
       )}
 
-      {/* Sidebar (Desktop Persistent + Mobile Slide-Over Drawer) */}
+      {/* Sidebar (Fixed on Desktop & Slide-Over on Mobile) */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-6 shadow-2xl transition-transform duration-300 ease-in-out md:static md:z-auto md:h-screen md:w-64 md:flex-shrink-0 md:translate-x-0 md:shadow-none md:px-6 md:py-8 ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col border-r border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-6 shadow-2xl transition-transform duration-300 ease-in-out md:fixed md:inset-y-0 md:left-0 md:z-30 md:h-screen md:w-64 md:flex-shrink-0 md:translate-x-0 md:shadow-none md:px-6 md:py-8 ${
           mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
@@ -166,11 +168,12 @@ export default function DashboardLayout() {
         </div>
       </aside>
 
-      {/* Main Content Area */}
-      <main className="min-w-0 flex-1 px-4 py-6 sm:px-8 md:py-10 max-w-6xl w-full">
+      {/* Main Content Area — Offset on desktop by the fixed sidebar width */}
+      <main className="min-w-0 flex-1 px-4 py-6 sm:px-8 md:py-10 max-w-6xl w-full md:ml-64">
         <Outlet />
       </main>
     </div>
   );
 }
+
 

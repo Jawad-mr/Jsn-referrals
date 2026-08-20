@@ -72,25 +72,32 @@ export default function Landing() {
     <div className="min-h-screen bg-[var(--color-ink)] text-[var(--color-text)]">
       <Navbar />
 
-      {/* HERO SECTION — FOCUSED ON JOIN & ALREADY A USER */}
-      <section className="relative overflow-hidden border-b border-[var(--color-border)] px-3 pt-12 pb-14 sm:px-8 sm:pt-20 sm:pb-20">
+      {/* HERO SECTION — FULL VIEWPORT FOLD ON OPENING */}
+      <section className="relative min-h-[calc(100svh-4rem)] flex flex-col justify-between overflow-hidden border-b border-[var(--color-border)] px-4 pt-10 pb-8 sm:px-8 sm:pt-20 sm:pb-16">
         <div
-          className="pointer-events-none absolute -top-32 right-[-5%] h-[420px] w-[420px] rounded-full opacity-20 blur-[110px]"
+          className="pointer-events-none absolute -top-32 right-[-5%] h-[500px] w-[500px] rounded-full opacity-25 blur-[120px]"
           style={{ background: "radial-gradient(circle, var(--color-yellow), transparent 70%)" }}
         />
 
-        <div className="mx-auto w-full max-w-4xl text-center">
-          <h1 className="font-[family-name:var(--font-display)] text-2xl xs:text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.15]">
+        {/* Empty placeholder for flex alignment */}
+        <div className="hidden sm:block" />
+
+        <div className="mx-auto w-full max-w-5xl text-center my-auto py-6">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-yellow)]/30 bg-[var(--color-yellow)]/10 px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--color-yellow)] mb-5">
+            <Share2 size={13} /> Official JSN Creative Referral Network
+          </div>
+
+          <h1 className="font-[family-name:var(--font-display)] text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
             Know someone who needs tech? <br />
             <span className="text-[var(--color-yellow)]">Get paid commission on every deal.</span>
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-xs sm:text-base leading-relaxed text-[var(--color-text-muted)]">
+          <p className="mx-auto mt-5 max-w-2xl text-xs sm:text-base leading-relaxed text-[var(--color-text-muted)]">
             Refer businesses to JSN Creative for websites, mobile apps, bakery/restaurant POS software, or AI solutions. Earn cash payouts on every closed project.
           </p>
 
           {/* MAIN SIGN IN & JOIN ACTIONS */}
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row w-full sm:w-auto">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row w-full sm:w-auto max-w-md mx-auto sm:max-w-none">
             <Link
               to="/join"
               className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl bg-[var(--color-yellow)] px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--color-ink)] shadow-xl transition active:scale-95 hover:bg-[var(--color-amber)]"
@@ -106,6 +113,18 @@ export default function Landing() {
               Already a user?
             </Link>
           </div>
+        </div>
+
+        {/* Subtle Scroll Down Prompt on mobile */}
+        <div className="text-center pt-2">
+          <a
+            href="#how-it-works"
+            aria-label="Scroll to how it works"
+            className="inline-flex flex-col items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[var(--color-text-faint)] hover:text-[var(--color-yellow)] transition"
+          >
+            <span>Explore Program</span>
+            <ChevronDown size={15} className="animate-bounce text-[var(--color-yellow)]" />
+          </a>
         </div>
       </section>
 

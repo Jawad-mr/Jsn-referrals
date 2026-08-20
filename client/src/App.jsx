@@ -16,6 +16,7 @@ import ReferralHistory from "./pages/ReferralHistory";
 import Materials from "./pages/Materials";
 import Earnings from "./pages/Earnings";
 import Profile from "./pages/Profile";
+import Support from "./pages/Support";
 
 import AdminLayout from "./pages/admin/AdminLayout";
 import AdminOverview from "./pages/admin/AdminOverview";
@@ -54,6 +55,7 @@ export default function App() {
             <Route path="materials" element={<Materials />} />
             <Route path="earnings" element={<Earnings />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="support" element={<Support />} />
           </Route>
 
           <Route

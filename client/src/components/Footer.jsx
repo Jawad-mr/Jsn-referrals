@@ -22,6 +22,7 @@ export default function Footer() {
               <li><a href="/#earnings" className="hover:text-[var(--color-text)]">Earnings</a></li>
               <li><Link to="/join" className="hover:text-[var(--color-text)]">Join the program</Link></li>
               <li><Link to="/terms" className="hover:text-[var(--color-text)]">Terms &amp; Conditions</Link></li>
+              <li><Link to="/dashboard/support" className="hover:text-[var(--color-text)]">Partner Support</Link></li>
               <li><a href="/#faq" className="hover:text-[var(--color-text)]">FAQ</a></li>
             </ul>
           </div>
