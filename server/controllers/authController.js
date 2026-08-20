@@ -198,6 +198,13 @@ export async function updateProfile(req, res) {
       user.payoutMethod.bankIFSC = String(bankIFSC).trim().toUpperCase();
     }
 
+    const isConfigured = Boolean(
+      (user.payoutMethod.upiId && user.payoutMethod.upiId.length > 0) ||
+      (user.payoutMethod.bankAccountNumber && user.payoutMethod.bankAccountNumber.length > 0)
+    );
+    user.hasPayoutDetails = isConfigured;
+    user.payoutMethod.isConfigured = isConfigured;
+    user.payoutMethod.isVerified = isConfigured;
     user.payoutMethod.updatedAt = new Date();
     await user.save();
 

@@ -25,12 +25,14 @@ const userSchema = new mongoose.Schema(
     totalEarnings: { type: Number, default: 0 }, // lifetime approved earnings (INR)
     pendingEarnings: { type: Number, default: 0 }, // submitted, not yet approved
     paidOut: { type: Number, default: 0 }, // amount actually paid to referrer
+    hasPayoutDetails: { type: Boolean, default: false },
 
     payoutMethod: {
       upiId: { type: String, trim: true, select: false }, // Encrypted at rest
       bankAccountName: { type: String, trim: true, select: false },
       bankAccountNumber: { type: String, trim: true, select: false }, // Encrypted at rest
       bankIFSC: { type: String, trim: true, select: false },
+      isConfigured: { type: Boolean, default: false },
       isVerified: { type: Boolean, default: false },
       updatedAt: { type: Date },
     },
@@ -62,7 +64,7 @@ userSchema.methods.toPublicJSON = function () {
     totalEarnings: this.totalEarnings,
     pendingEarnings: this.pendingEarnings,
     paidOut: this.paidOut,
-    hasPayoutDetails: Boolean(this.payoutMethod?.upiId || this.payoutMethod?.bankAccountNumber),
+    hasPayoutDetails: Boolean(this.hasPayoutDetails || this.payoutMethod?.isConfigured),
     termsAcceptedAt: this.termsAcceptedAt,
     createdAt: this.createdAt,
   };

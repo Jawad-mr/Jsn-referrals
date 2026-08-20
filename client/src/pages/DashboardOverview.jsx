@@ -12,12 +12,20 @@ export default function DashboardOverview() {
   const [recent, setRecent] = useState([]);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [hasPayout, setHasPayout] = useState(Boolean(user?.hasPayoutDetails));
 
   useEffect(() => {
-    Promise.all([api.get("/referrals/mine/stats"), api.get("/referrals/mine")])
-      .then(([statsRes, listRes]) => {
+    Promise.all([
+      api.get("/referrals/mine/stats"),
+      api.get("/referrals/mine"),
+      api.get("/auth/profile").catch(() => null),
+    ])
+      .then(([statsRes, listRes, profileRes]) => {
         setStats(statsRes.data.stats);
         setRecent(listRes.data.referrals.slice(0, 5));
+        if (profileRes?.data?.user?.payoutMethod?.isConfigured || profileRes?.data?.user?.hasPayoutDetails) {
+          setHasPayout(true);
+        }
       })
       .finally(() => setLoading(false));
   }, []);
@@ -81,8 +89,8 @@ export default function DashboardOverview() {
         </div>
       </div>
 
-      {/* Payout Details Prompt if not yet configured */}
-      {!user?.hasPayoutDetails && (
+      {/* Payout Details Prompt only shown if user has NOT yet added UPI/Bank */}
+      {!hasPayout && !user?.hasPayoutDetails && (
         <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-[var(--color-mint)]/30 bg-[var(--color-mint)]/5 p-4">
           <div>
             <p className="text-xs font-bold text-white">Add your UPI ID for Instant Payouts</p>
